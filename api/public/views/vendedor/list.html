@@ -1,0 +1,32 @@
+<md-toolbar md-scroll-shrink>
+  <div class="md-toolbar-tools">
+    <h3>
+      <span>Lista de Vendedores</span>
+    </h3>
+  </div>
+</md-toolbar>
+
+<md-whiteframe class="md-whiteframe-z1" layout="" layout-align="center center">
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Francisco José da Silva Sousa</td>
+        <td>
+          <md-button ng-href="#/vendedor/edit/1" title="Editar"><i class="fa fa-edit"></i></md-button>
+          <md-button title="Remover"><i class="fa fa-trash"></i></md-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</md-whiteframe>
