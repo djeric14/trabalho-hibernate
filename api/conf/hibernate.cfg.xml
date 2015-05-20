@@ -31,10 +31,10 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="br.edu.fa7.model.Endereco" />
-		<mapping class="br.edu.fa7.model.Pessoa" />
-		<mapping class="br.edu.fa7.model.Cliente" />
-		<mapping class="br.edu.fa7.model.Vendedor" />
+		<mapping class="models.Endereco" />
+		<mapping class="models.Pessoa" />
+		<mapping class="models.Cliente" />
+		<mapping class="models.Vendedor" />
 
 	</session-factory>
 

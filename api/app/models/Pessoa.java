@@ -18,7 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Pessoa")
+@Table(name = "pessoa")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Pessoa extends BaseModel {
 
@@ -45,7 +45,6 @@ public class Pessoa extends BaseModel {
     @Basic(optional = false)
     private Date dataNascimento;
 	
-	@Id
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_endereco", nullable = false)    
 	private Endereco endereco;

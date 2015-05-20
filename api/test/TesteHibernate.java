@@ -3,6 +3,7 @@ import java.util.Calendar;
 import models.Cliente;
 import models.Endereco;
 import models.Pessoa;
+import models.Vendedor;
 import dao.EnderecoDao;
 
 public class TesteHibernate {
@@ -27,7 +28,7 @@ public class TesteHibernate {
 
 		enderecoDao.salvar(endereco2);
 
-		Pessoa pessoa = new Pessoa();
+		Pessoa pessoa = new Cliente();
 
 		pessoa.setCpf("111111111");
 
@@ -37,14 +38,14 @@ public class TesteHibernate {
 		dt.set(Calendar.MONTH, Calendar.AUGUST);
 		dt.set(Calendar.DAY_OF_MONTH, 11);
 		pessoa.setDataNascimento(dt.getTime());
-		pessoa.setEndereco(endereco);
 		pessoa.setNome("João");
+		pessoa.setEndereco(endereco2);
 		
 		enderecoDao.salvar(pessoa);
 
-		Pessoa pessoa2 = new Pessoa();
+		Pessoa pessoa2 = new Vendedor();
 
-		pessoa2.setCpf("111111111");
+		pessoa2.setCpf("222222222");
 
 		dt = Calendar.getInstance();
 
@@ -52,16 +53,11 @@ public class TesteHibernate {
 		dt.set(Calendar.MONTH, Calendar.FEBRUARY);
 		dt.set(Calendar.DAY_OF_MONTH, 14);
 		pessoa2.setDataNascimento(dt.getTime());
-		pessoa2.setEndereco(endereco2);
 		pessoa2.setNome("Mario");
+		pessoa2.setEndereco(endereco);
 		
 		enderecoDao.salvar(pessoa2);
-		
-		
-		Cliente c = new Cliente();
-		
-		enderecoDao.salvar(c);
-		
+				
 
 		enderecoDao.commit();
 	}

@@ -6,5 +6,4 @@ public class EnderecoDao extends GenericDao {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 }
