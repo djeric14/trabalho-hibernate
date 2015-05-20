@@ -1,14 +1,10 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-import play.db.jpa.JPA;
-import models.Aluno;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
 
 public class Application extends Controller {
 
