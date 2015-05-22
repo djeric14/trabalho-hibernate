@@ -1,14 +1,12 @@
 package models;
 
-import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="visita_id_seq")
 @Table(name = "visita")
-public class Visita implements Serializable {
+public class Visita extends BaseModel {
 
     private static final long serialVersionUID = -5672269537992623726L;
 
