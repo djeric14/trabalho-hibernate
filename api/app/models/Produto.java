@@ -3,7 +3,7 @@ package models;
 import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(name="SEQUENCE", sequenceName="produto_id_seq")
+@SequenceGenerator(initialValue=1, name="SEQUENCE", sequenceName="produto_id_seq")
 @Table(name = "produto")
 public class Produto extends BaseModel {
 
@@ -12,7 +12,6 @@ public class Produto extends BaseModel {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQUENCE")
     @Column(name = "id_produto")
-    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "descricao")

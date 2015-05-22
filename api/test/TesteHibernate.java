@@ -2,7 +2,9 @@ import java.util.Calendar;
 
 import models.Cliente;
 import models.Endereco;
+import models.Fornecedor;
 import models.Pessoa;
+import models.Produto;
 import models.Vendedor;
 import dao.EnderecoDao;
 
@@ -57,6 +59,22 @@ public class TesteHibernate {
 		pessoa2.setEndereco(endereco);
 		
 		enderecoDao.salvar(pessoa2);
+		
+		Fornecedor fornecedor = new Fornecedor();
+        fornecedor.setCnpj("39823923");
+        fornecedor.setNome("Fornecedor 1");
+        fornecedor.setNomeFantasia("Nome Fantasia do Fornecedor");
+        fornecedor.setEndereco(endereco);
+
+        enderecoDao.salvar(fornecedor);
+
+        Produto produto = new Produto();
+        produto.setEstoque(10);
+        produto.setFornecedor(fornecedor);
+        produto.setNome("Produto 1");
+        produto.setPreco(10.1);
+        
+        enderecoDao.salvar(produto);
 				
 
 		enderecoDao.commit();

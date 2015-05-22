@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="pedido_id_seq")
-@Table(name = "produto")
+@Table(name = "pedido")
 public class Pedido extends BaseModel {
 
     private static final long serialVersionUID = -1339717517200607306L;

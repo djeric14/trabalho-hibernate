@@ -1,24 +1,26 @@
 package controllers;
 
-import dao.PessoaDao;
-import factory.SessionHibernateFactory;
-import models.*;
-import org.hibernate.Session;
+import java.util.Date;
+
+import models.Agenda;
+import models.Cliente;
+import models.Endereco;
+import models.Fornecedor;
+import models.Produto;
+import models.Vendedor;
+import models.Visita;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
-
-import java.util.Date;
+import dao.PessoaDao;
 
 public class Application extends Controller {
 
 
     public static Result index() {
-        Session session = SessionHibernateFactory.getHibernateSession();
-        session.beginTransaction();
-
         PessoaDao gd = new PessoaDao();
-
+        gd.begin();
+        
         Endereco endereco = new Endereco();
         endereco.setLatitude(1);
         endereco.setLongitude(1);
@@ -76,7 +78,7 @@ public class Application extends Controller {
 
         gd.salvar(produto);
 
-        session.getTransaction().commit();
+        gd.commit();
 
         return ok(index.render("My first App with Play!"));
     }
