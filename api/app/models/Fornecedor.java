@@ -1,23 +1,11 @@
 package models;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="fornecedor_id_seq")
 @Table(name = "fornecedor")
-public class Fornecedor implements Serializable {
+public class Fornecedor extends BaseModel {
 
     private static final long serialVersionUID = -603829058490441722L;
 
@@ -38,6 +26,10 @@ public class Fornecedor implements Serializable {
     @Column(name = "cnpj")
     @Basic(optional = false)
     private String cnpj;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="id_endereco", nullable = false)
+    private Endereco endereco;
 
     public Integer getId() {
 		return id;
@@ -69,5 +61,13 @@ public class Fornecedor implements Serializable {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

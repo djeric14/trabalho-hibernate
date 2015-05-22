@@ -1,13 +1,10 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id_pessoa")
+@SequenceGenerator(name="SEQUENCE", sequenceName="cliente_id_seq")
+@Table(name = "cliente")
 public class Cliente extends Pessoa {
 
 	/**
@@ -15,7 +12,7 @@ public class Cliente extends Pessoa {
 	 */
 	private static final long serialVersionUID = -4699449860340032136L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQUENCE")
 	@Column(name = "id_cliente")
 	private Integer id;
 	

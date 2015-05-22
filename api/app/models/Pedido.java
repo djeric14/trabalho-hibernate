@@ -1,18 +1,17 @@
 package models;
 
-import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(name="SEQUENCE", sequenceName="agenda_id_seq")
-@Table(name = "agenda")
-public class Agenda extends BaseModel {
+@SequenceGenerator(name="SEQUENCE", sequenceName="pedido_id_seq")
+@Table(name = "produto")
+public class Pedido extends BaseModel {
 
-    private static final long serialVersionUID = 3322492327382107596L;
+    private static final long serialVersionUID = -1339717517200607306L;
 
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQUENCE")
-    @Column(name = "id_agenda")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQUENCE")
+    @Column(name = "id_pedido")
     @Basic(optional = false)
     private Integer id;
 
@@ -24,18 +23,13 @@ public class Agenda extends BaseModel {
     @Basic(optional = false)
     private Cliente cliente;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data")
-    @Basic(optional = false)
-    protected Date data;
-
     public Integer getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Vendedor getVendedor() {
         return vendedor;
@@ -51,13 +45,5 @@ public class Agenda extends BaseModel {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
 }

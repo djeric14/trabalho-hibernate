@@ -2,21 +2,25 @@ package factory;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 public class SessionHibernateFactory {
-	private static SessionFactory sf;
+	private static SessionFactory sessionFactory;
+	private static ServiceRegistry serviceRegistry;
 
 	public static synchronized Session getHibernateSession() {
-		if (sf == null) {
-			Configuration configuration = new Configuration().configure();
-			ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(
-					configuration.getProperties()).buildServiceRegistry();
-			sf = configuration.buildSessionFactory(serviceRegistry);
+		if (sessionFactory == null) {
+			Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+
+			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+					configuration.getProperties()
+			).build();
+
+			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		}
-		Session s = sf.getCurrentSession();
-		return s;
+
+		return sessionFactory.getCurrentSession();
 	}
 }

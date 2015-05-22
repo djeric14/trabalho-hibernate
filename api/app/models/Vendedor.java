@@ -1,12 +1,9 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "vendedor")
 @PrimaryKeyJoinColumn(name="id_pessoa")
 public class Vendedor extends Pessoa {
 
