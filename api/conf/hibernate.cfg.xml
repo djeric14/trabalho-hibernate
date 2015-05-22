@@ -45,6 +45,8 @@
 		<mapping class="models.Fornecedor" />
 		<mapping class="models.Produto" />
 		<mapping class="models.Visita" />
+		<mapping class="models.Pedido" />
+		<mapping class="models.ItensPedido" />
 
 	</session-factory>
 
