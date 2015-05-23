@@ -1,6 +1,8 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,17 +19,20 @@ public class Agenda extends BaseModel {
     private Integer id;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @JoinColumn(name="id_vendedor", nullable = false)
     private Vendedor vendedor;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @JoinColumn(name="id_cliente", nullable = false)
     private Cliente cliente;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data")
     @Basic(optional = false)
     protected Date data;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agenda", fetch=FetchType.LAZY)
+    private List<Visita> visitasAgendadas;
 
     public Integer getId() {
 		return id;
@@ -60,4 +65,12 @@ public class Agenda extends BaseModel {
     public void setData(Date data) {
         this.data = data;
     }
+
+	public List<Visita> getVisitasAgendadas() {
+		return visitasAgendadas;
+	}
+
+	public void setVisitasAgendadas(List<Visita> visitasAgendadas) {
+		this.visitasAgendadas = visitasAgendadas;
+	}
 }

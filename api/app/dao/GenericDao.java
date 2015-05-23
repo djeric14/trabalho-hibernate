@@ -23,12 +23,20 @@ public abstract class GenericDao {
 		session.getTransaction().commit();
 	}
 
+	public void rollback() {
+		session.getTransaction().rollback();
+	}
+
 	public void salvar(BaseModel base) {
 		session.saveOrUpdate(base);
 	}
 
 	public void deletar(BaseModel base) {
 		session.delete(base);
+	}
+
+	public boolean isConnected() {
+		return session.isConnected();
 	}
 
 	public void close() {
@@ -39,5 +47,4 @@ public abstract class GenericDao {
 	public List<BaseModel> listarTodos(Class base){
     	return session.createQuery("from "+base.getName()).list();
     }
-
 }

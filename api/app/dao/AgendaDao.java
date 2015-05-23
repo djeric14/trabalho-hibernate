@@ -6,4 +6,5 @@ public class AgendaDao extends GenericDao {
 		super();
 	}
 
+	
 }

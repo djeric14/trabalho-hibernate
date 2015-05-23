@@ -4,7 +4,7 @@
 
 <html ng-app="sellerApp">
     <head>
-        <title>Fa7 :: Seller - Trabalho Hibernate</title>
+        <title>AdminLTE - @title</title>
         
     	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
 
@@ -62,13 +62,10 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MENU DE NAVEGAÇÃO</li>
-            <li>
-              <a href="#/"><i class="fa fa-th"></i><span>Pedidos</span></a>
-            </li>
-
-            <li><a href="#/"><i class="fa fa-th"></i><span>Cadastro de visita</span></a></li>
-            <li><a href="#/"><i class="fa fa-th"></i><span>Cadastro de Clientes</span></a></li>
-            <li><a href="#/vendedor/list"><i class="fa fa-th"></i><span>Cadastro de Vendedor</span></a></li>
+            <li><a href="#"><i class="fa fa-th"></i><span>Pedidos</span></a></li>
+            <li><a href="#"><i class="fa fa-th"></i><span>Clientes</span></a></li>
+            <li><a href="@routes.VendedorController.index()"><i class="fa fa-th"></i><span>Vendedores</span></a></li>
+            <li><a href="#"><i class="fa fa-th"></i><span>Visitas</span></a></li>
 
           </ul>
         </section>
@@ -80,13 +77,15 @@
 
       	<section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            @title
+            <!-- <small>Control panel</small> -->
           </h1>
         </section>
 
         <!-- Main content -->
-        <section class="content" ng-view></section>
+        <section class="content">
+        	@content
+        </section>
         
       </div><!-- /.content-wrapper -->
     </div><!-- ./wrapper -->

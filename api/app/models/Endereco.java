@@ -1,24 +1,13 @@
 package models;
 
-import java.util.Collection;
-
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "endereco")
 public class Endereco extends BaseModel {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8329398961902370895L;
 
@@ -26,14 +15,6 @@ public class Endereco extends BaseModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
     private Integer id;
-	
-	@Column(name = "latitude")
-    @Basic(optional = false)
-    private Integer latitude;
-    
-    @Column(name = "longitude")
-    @Basic(optional = false)
-    private Integer longitude;
     
     @Column(name = "logradouro")
     @Basic(optional = false)
@@ -42,44 +23,25 @@ public class Endereco extends BaseModel {
     @Column(name = "numero")
     @Basic(optional = false)
     private Integer numero;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "endereco", fetch=FetchType.LAZY)
-    private Collection<Pessoa> pessoas;
 
-    public Endereco() {
-        
-    }
+    @Column(name = "cidade")
+    @Basic(optional = false)
+    private String cidade;
+
+    @Column(name = "uf")
+    @Basic(optional = false)
+    private String uf;
     
+    @Column(name = "cep")
+    @Basic(optional = false)
+    private String cep;
+
     public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-    
-    public Collection<Pessoa> getPessoas() {
-		return pessoas;
-	}
-
-	public void setPessoas(Collection<Pessoa> pessoas) {
-		this.pessoas = pessoas;
-	}
-
-	public Integer getLatitude() {
-		return latitude;
-	}
-	
-	public void setLatitude(Integer latitude) {
-		this.latitude = latitude;
-	}
-
-	public Integer getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Integer longitude) {
-		this.longitude = longitude;
 	}
 
 	public String getLogradouro() {
@@ -98,5 +60,30 @@ public class Endereco extends BaseModel {
 		this.numero = numero;
 	}
 
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+	
 	
 }
