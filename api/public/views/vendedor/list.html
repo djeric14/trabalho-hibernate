@@ -1,32 +1,45 @@
-<md-toolbar md-scroll-shrink>
-  <div class="md-toolbar-tools">
-    <h3>
-      <span>Lista de Vendedores</span>
-    </h3>
-  </div>
-</md-toolbar>
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        
+        <div class="box-header">
+          <h3 class="box-title">Lista de vendedores</h3>
+        </div><!-- /.box-header -->
 
-<md-whiteframe class="md-whiteframe-z1" layout="" layout-align="center center">
+        <div class="box-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Rendering engine</th>
+                <th>Browser</th>
+                <th>Platform(s)</th>
+                <th>Engine version</th>
+                <th>CSS grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Trident</td>
+                <td>Internet
+                  Explorer 4.0</td>
+                <td>Win 95+</td>
+                <td> 4</td>
+                <td>X</td>
+              </tr>
+              <tr>
+                <td>Trident</td>
+                <td>Internet
+                  Explorer 5.0</td>
+                <td>Win 95+</td>
+                <td>5</td>
+                <td>C</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
 
-  <!-- Table starts here -->
-  <table id="table" class="table table-hover table-mc-light-blue">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Francisco José da Silva Sousa</td>
-        <td>
-          <md-button ng-href="#/vendedor/edit/1" title="Editar"><i class="fa fa-edit"></i></md-button>
-          <md-button title="Remover"><i class="fa fa-trash"></i></md-button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-</md-whiteframe>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+  </section><!-- /.content -->
