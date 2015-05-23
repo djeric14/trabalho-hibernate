@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -30,6 +32,9 @@ public class Fornecedor extends BaseModel {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="id_endereco", nullable = false)
     private Endereco endereco;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor", fetch=FetchType.LAZY)
+    private List<Produto> listarProdutos;
 
     public Integer getId() {
 		return id;
@@ -70,4 +75,14 @@ public class Fornecedor extends BaseModel {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+	public List<Produto> getListarProdutos() {
+		return listarProdutos;
+	}
+
+	public void setListarProdutos(List<Produto> listarProdutos) {
+		this.listarProdutos = listarProdutos;
+	}
+    
+    
 }

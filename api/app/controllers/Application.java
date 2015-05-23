@@ -26,6 +26,7 @@ public class Application extends Controller {
         endereco.setLongitude(1);
         endereco.setNumero(100);
         endereco.setLogradouro("Rua");
+        endereco.setCep("60000");
 
         gd.salvar(endereco);
 

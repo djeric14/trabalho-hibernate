@@ -43,6 +43,10 @@ public class Endereco extends BaseModel {
     @Basic(optional = false)
     private Integer numero;
     
+    @Column(name = "cep")
+    @Basic(optional = false)
+    private String cep;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endereco", fetch=FetchType.LAZY)
     private Collection<Pessoa> pessoas;
 
@@ -98,5 +102,13 @@ public class Endereco extends BaseModel {
 		this.numero = numero;
 	}
 
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
 	
 }

@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +17,16 @@ public class Vendedor extends Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_vendedor")
 	private Integer id;
-
+	
+	@Column(name = "comissao")
+	private Double comissao = 0.10;
+	
+	@Column(name = "total_vendas")
+	private Integer totalVendas = 0;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch=FetchType.LAZY)
+	private List<Agenda> agendaVendedor;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -24,5 +35,27 @@ public class Vendedor extends Pessoa {
 		this.id = id;
 	}
 
-	
+	public Double getComissao() {
+		return comissao;
+	}
+
+	public void setComissao(Double comissao) {
+		this.comissao = comissao;
+	}
+
+	public Integer getTotalVendas() {
+		return totalVendas;
+	}
+
+	public void setTotalVendas(Integer totalVendas) {
+		this.totalVendas = totalVendas;
+	}
+
+	public List<Agenda> getAgendaVendedor() {
+		return agendaVendedor;
+	}
+
+	public void setAgendaVendedor(List<Agenda> agendaVendedor) {
+		this.agendaVendedor = agendaVendedor;
+	}
 }

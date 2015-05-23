@@ -39,5 +39,4 @@ public abstract class GenericDao {
 	public List<BaseModel> listarTodos(Class base){
     	return session.createQuery("from "+base.getName()).list();
     }
-
 }
