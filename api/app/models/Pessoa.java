@@ -2,29 +2,13 @@ package models;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pessoa")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Pessoa extends BaseModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9052132527752407992L;
 
 	@Id
@@ -45,13 +29,12 @@ public class Pessoa extends BaseModel {
     @Basic(optional = false)
     private Date dataNascimento;
 	
-    @ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_endereco", nullable = false)    
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="id_endereco", nullable = false)
 	private Endereco endereco;
 	
 	public Pessoa() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -93,7 +76,7 @@ public class Pessoa extends BaseModel {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+
 	
 	
 }

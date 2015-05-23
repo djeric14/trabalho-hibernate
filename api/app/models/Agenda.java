@@ -19,11 +19,11 @@ public class Agenda extends BaseModel {
     private Integer id;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @JoinColumn(name="id_vendedor", nullable = false)
     private Vendedor vendedor;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @JoinColumn(name="id_cliente", nullable = false)
     private Cliente cliente;
 
     @Temporal(TemporalType.TIMESTAMP)

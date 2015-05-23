@@ -1,7 +1,5 @@
 package models;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,19 +11,21 @@ public class Vendedor extends Pessoa {
 	 * 
 	 */
 	private static final long serialVersionUID = 6621094817508679486L;
-	
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_vendedor")
 	private Integer id;
 	
 	@Column(name = "comissao")
+	@Basic(optional = true)
 	private Double comissao = 0.10;
-	
+
 	@Column(name = "total_vendas")
+	@Basic(optional = true)
 	private Integer totalVendas = 0;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch=FetchType.LAZY)
-	private List<Agenda> agendaVendedor;
+	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch=FetchType.LAZY)
+	// private List<Agenda> agendaVendedor;
 	
 	public Integer getId() {
 		return id;
@@ -51,11 +51,11 @@ public class Vendedor extends Pessoa {
 		this.totalVendas = totalVendas;
 	}
 
-	public List<Agenda> getAgendaVendedor() {
-		return agendaVendedor;
-	}
+	// public List<Agenda> getAgendaVendedor() {
+	// 	return agendaVendedor;
+	// }
 
-	public void setAgendaVendedor(List<Agenda> agendaVendedor) {
-		this.agendaVendedor = agendaVendedor;
-	}
+	// public void setAgendaVendedor(List<Agenda> agendaVendedor) {
+	// 	this.agendaVendedor = agendaVendedor;
+	// }
 }
