@@ -1,9 +1,14 @@
+import java.util.Calendar;
 import java.util.List;
 
 import models.Cliente;
 import models.Endereco;
+import models.Fornecedor;
 import models.ItensPedido;
 import models.Pedido;
+import models.Pessoa;
+import models.Produto;
+import models.Vendedor;
 import dao.ClienteDao;
 import dao.EnderecoDao;
 
@@ -13,19 +18,20 @@ public class TesteHibernate {
 		// TODO Auto-generated method stub
 		EnderecoDao enderecoDao = new EnderecoDao();
 		enderecoDao.begin();
-	/**	Endereco endereco = new Endereco();
-		endereco.setLatitude(10);
+	
+		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua Felino Barroso");
-		endereco.setLongitude(145);
+		endereco.setCidade("Fortaleza");
+		endereco.setUf("CE");
 		endereco.setNumero(1009);
 		endereco.setCep("60050-130");
 
 		enderecoDao.salvar(endereco);
 
 		Endereco endereco2 = new Endereco();
-		endereco2.setLatitude(10);
+		endereco2.setCidade("Fortaleza");
+		endereco2.setUf("CE");
 		endereco2.setLogradouro("Rua Felino Barroso");
-		endereco2.setLongitude(145);
 		endereco2.setNumero(2000);
 		endereco2.setCep("98888-130");
 
@@ -75,7 +81,7 @@ public class TesteHibernate {
         produto.setNome("Produto 1");
         produto.setPreco(10.1);
         
-        enderecoDao.salvar(produto); */
+        enderecoDao.salvar(produto);
 		
 		ClienteDao cDao = new ClienteDao();
 		
@@ -85,7 +91,7 @@ public class TesteHibernate {
 			System.out.println(c.getNome());
 			System.out.println(c.getCpf());
 			
-			List<Pedido> listP  = c.getPedidos();
+			/**	List<Pedido> listP  = c.getPedidos();
 			
 			for(Pedido p: listP){
 				System.out.println(p.getCliente().getNome());
@@ -93,9 +99,7 @@ public class TesteHibernate {
 					System.out.println(i.getProduto().getNome());
 				}
 			}
-			
-			
-			
+					
 			List<Cliente> cList = cDao.consultarClientesPorNome("João");
 			
 			
@@ -106,7 +110,7 @@ public class TesteHibernate {
 			
 			Endereco e = enderecoDao.consultarEnderecoCep("60050-130", 1009);
 			
-			System.out.println(e.getLogradouro()+" - "+e.getLatitude());
+		//	System.out.println(e.getLogradouro()+" - "+e.getLatitude()); */
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

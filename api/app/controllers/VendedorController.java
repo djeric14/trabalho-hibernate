@@ -1,15 +1,15 @@
 package controllers;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
+import java.util.List;
+
 import models.Endereco;
+import models.Vendedor;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.vendedor.*;
-
+import views.html.vendedor.form;
+import views.html.vendedor.index;
 import dao.VendedorDao;
-import models.Vendedor;
-import java.util.List;
 
 public class VendedorController extends Controller {
 

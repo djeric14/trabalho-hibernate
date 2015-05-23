@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import models.Cliente;
+
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 
@@ -13,6 +14,7 @@ public class ClienteDao extends GenericDao {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Cliente> todos() {
 		return super.session.createCriteria(Cliente.class).setFetchMode("endereco", FetchMode.JOIN).list();
 	}

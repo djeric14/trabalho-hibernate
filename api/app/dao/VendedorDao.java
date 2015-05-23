@@ -4,7 +4,6 @@ import java.util.List;
 
 import models.Vendedor;
 
-import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 
@@ -14,6 +13,7 @@ public class VendedorDao extends GenericDao {
 		super();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Vendedor> todos() {
 		return super.session.createCriteria(Vendedor.class).setFetchMode("endereco", FetchMode.JOIN).list();
 	}

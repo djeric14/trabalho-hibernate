@@ -1,18 +1,8 @@
 package controllers;
 
-import java.util.Date;
-
-import models.Agenda;
-import models.Cliente;
-import models.Endereco;
-import models.Fornecedor;
-import models.Produto;
-import models.Vendedor;
-import models.Visita;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
-import dao.PessoaDao;
 
 public class Application extends Controller {
 
