@@ -29,7 +29,7 @@ public class Fornecedor extends BaseModel {
     @Basic(optional = false)
     private String cnpj;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="id_endereco", nullable = false)
     private Endereco endereco;
     
