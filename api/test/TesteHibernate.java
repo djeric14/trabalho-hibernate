@@ -11,6 +11,7 @@ import models.Produto;
 import models.Vendedor;
 import dao.ClienteDao;
 import dao.EnderecoDao;
+import dao.PedidoDao;
 
 public class TesteHibernate {
 
@@ -19,7 +20,7 @@ public class TesteHibernate {
 		EnderecoDao enderecoDao = new EnderecoDao();
 		enderecoDao.begin();
 	
-		Endereco endereco = new Endereco();
+	/**	Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua Felino Barroso");
 		endereco.setCidade("Fortaleza");
 		endereco.setUf("CE");
@@ -38,6 +39,7 @@ public class TesteHibernate {
 		enderecoDao.salvar(endereco2);
 
 		Pessoa pessoa = new Cliente();
+	
 
 		pessoa.setCpf("111111111");
 
@@ -81,32 +83,32 @@ public class TesteHibernate {
         produto.setNome("Produto 1");
         produto.setPreco(10.1);
         
-        enderecoDao.salvar(produto);
+        enderecoDao.salvar(produto); */
 		
-		ClienteDao cDao = new ClienteDao();
+		PedidoDao cDao = new PedidoDao();
 		
 		try {
 			//System.out.println(pessoa.getId());
-			Cliente c = cDao.consultarCliente(new Integer(1));
-			System.out.println(c.getNome());
-			System.out.println(c.getCpf());
+			//Pedido c = cDao.pedidosCliente(new Integer(1));
 			
-			/**	List<Pedido> listP  = c.getPedidos();
+			List<Pedido> listP  = cDao.pedidosCliente(1);
 			
 			for(Pedido p: listP){
 				System.out.println(p.getCliente().getNome());
+				System.out.println(p.getCliente().getCpf());
 				for(ItensPedido i: p.getItensPedido()){
 					System.out.println(i.getProduto().getNome());
 				}
+				
 			}
 					
-			List<Cliente> cList = cDao.consultarClientesPorNome("João");
+			//List<Cliente> cList = cDao.consultarClientesPorNome("João");
 			
 			
-			for(Cliente c1 :cList){
+			/**for(Cliente c1 :cList){
 				System.out.println(c1.getNome());
 				System.out.println(c1.getCpf());
-			}
+			}*/
 			
 			Endereco e = enderecoDao.consultarEnderecoCep("60050-130", 1009);
 			
