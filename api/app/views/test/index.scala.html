@@ -1,0 +1,18 @@
+@main("Testes") {
+
+@if(flash.get("success") != null) {
+	<div class="alert alert-success" role="alert">@flash.get("success")</div>
+}
+
+@if(flash.get("error") != null) {
+	<div class="alert alert-danger" role="alert">@flash.get("error")</div>
+}
+
+<section class="content">
+	<a href="@routes.TestController.carga()" class="btn btn-primary">Carga Inicial</a>
+	<a href="@routes.TestController.pool()" class="btn btn-primary">Testar Pool de conexões</a>
+	<a href="@routes.TestController.cache()" class="btn btn-primary">Testar Cache</a>
+</section>
+<!-- /.content -->
+}
+

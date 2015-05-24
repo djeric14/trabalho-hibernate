@@ -42,9 +42,24 @@ public abstract class GenericDao {
 	public void close() {
 		session.close();
 	}
+
+	@SuppressWarnings("unchecked")
+	public Long count(Class base) {
+		StringBuilder consulta = new StringBuilder();
+
+		consulta.append("select count(*) from ");
+		consulta.append(base.getName());
+
+		return (Long) session.createQuery(consulta.toString()).uniqueResult();
+	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BaseModel> listarTodos(Class base){
-    	return session.createQuery("from "+base.getName()).list();
+		StringBuilder consulta = new StringBuilder();
+
+		consulta.append("select count(*) from ");
+		consulta.append(base.getName());
+
+		return session.createQuery(consulta.toString()).list();
     }
 }

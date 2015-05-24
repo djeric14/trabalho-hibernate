@@ -187,9 +187,6 @@ public class AgendaController extends Controller {
             dao.begin();
 
             Agenda agenda = dao.consultarAgenda(idAgenda);
-
-            visita.setLatitude(1.1);
-            visita.setLongitude(1.1);
             visita.setAgenda(agenda);
 
             dao.salvar(visita);
