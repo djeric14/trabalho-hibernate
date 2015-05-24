@@ -22,8 +22,7 @@ public class Produto extends BaseModel {
     @Basic(optional = false)
     private Double preco;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     private Fornecedor fornecedor;
 
     @Column(name = "estoque")
