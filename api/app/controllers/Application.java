@@ -1,79 +1,47 @@
 package controllers;
 
+import dao.GenericDao;
+import dao.VisitaDao;
+import models.Cliente;
+import models.Fornecedor;
+import models.Vendedor;
+import models.Visita;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Application extends Controller {
 
 
     public static Result index() {
-//         PessoaDao gd = new PessoaDao();
-//         gd.begin();
-//
-//         Endereco endereco = new Endereco();
-////         endereco.setLatitude(1);
-////         endereco.setLongitude(1);
-//         endereco.setNumero(100);
-//         endereco.setLogradouro("Rua");
-//         endereco.setCep("60000");
-//         endereco.setCidade("Maracanaú");
-//         endereco.setUf("CE");
-//
-//         gd.salvar(endereco);
-//
-//         Cliente cliente = new Cliente();
-//         cliente.setCpf("34483765");
-//         cliente.setDataNascimento(new Date());
-//         cliente.setNome("Nome do Cliente");
-//         cliente.setEndereco(endereco);
-//
-//         gd.salvar(cliente);
-//
-//         Vendedor vendedor = new Vendedor();
-//         vendedor.setNome("Nome do Vendedor");
-//         vendedor.setCpf("3458495");
-//         vendedor.setDataNascimento(new Date());
-//         vendedor.setEndereco(endereco);
-//
-//         gd.salvar(vendedor);
+        VisitaDao visitaDao = new VisitaDao();
+        List<Visita> visitas = new ArrayList<>();
+        HashMap<String, Object> registros = new HashMap<>();
 
-//         Agenda agenda = new Agenda();
-//
-//         agenda.setCliente(cliente);
-//         agenda.setData(new Date());
-//         agenda.setVendedor(vendedor);
+        try {
+            visitaDao.begin();
+            visitas = visitaDao.todos();
 
-//         gd.salvar(agenda);
+            registros.put("visitas", visitas.size());
+            registros.put("clientes", visitaDao.count(Cliente.class));
+            registros.put("vendedores", visitaDao.count(Vendedor.class));
+            registros.put("fornecedores", visitaDao.count(Fornecedor.class));
 
-//         Visita visita = new Visita();
-//         visita.setAgenda(agenda);
-//         visita.setHoraFim(new Date());
-//         visita.setHoraInicio(new Date());
-//         visita.setLatitude(1.1);
-//         visita.setLongitude(1.2);
+            visitaDao.commit();
 
-//         gd.salvar(visita);
+        } catch (Exception e) {
+            if (visitaDao.isConnected()) {
+                visitaDao.rollback();
+            }
 
-//         Fornecedor fornecedor = new Fornecedor();
-//         fornecedor.setCnpj("39823923");
-//         fornecedor.setNome("Fornecedor 1");
-//         fornecedor.setNomeFantasia("Nome Fantasia do Fornecedor");
-//         fornecedor.setEndereco(endereco);
-//
-//         gd.salvar(fornecedor);
-//
-//         Produto produto = new Produto();
-//         produto.setEstoque(10);
-//         produto.setFornecedor(fornecedor);
-//         produto.setNome("Produto 1");
-//         produto.setPreco(10.1);
-//
-//         gd.salvar(produto);
-//
-//         gd.commit();
+            flash("error", "Ocorreu um erro ao recurepar os dados: " + e.getMessage());
+        }
 
-        return ok(index.render("My first App with Play!"));
+        return ok(index.render(visitas, registros));
     }
 
 }

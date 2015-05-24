@@ -27,8 +27,11 @@
                                 <button type="submit" class="btn btn-primary">Salvar</button>
                             </div>
 
-                            <input type="hidden" value='@(mForm("id").value)' name="id" />
                             <input type="hidden" value='@(mForm("agenda.id").value)' name="id_agenda" />
+                            <input type="hidden" value='@(mForm("id").value)' name="id" />
+
+                            <input type="hidden" name="latitude" id="latitude" />
+                            <input type="hidden" name="longitude" id="longitude" />
                         </div><!-- /.box-body -->
 
                     </div><!-- /.box -->
@@ -36,5 +39,24 @@
             </div>
         </form>
     </section>
+
+    <script>
+    (function(){
+          navigator.geolocation.getCurrentPosition(success, error);
+
+          function success(position) {
+            document.getElementById("latitude").value = position.coords.latitude;
+            document.getElementById("longitude").value = position.coords.longitude;
+          };
+
+          function error() {
+            document.getElementById("latitude").value = 0;
+            document.getElementById("longitude").value = 0;
+
+            console.log("Unable to retrieve your location");
+          };
+    })();
+
+    </script>
 
 }
