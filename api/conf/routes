@@ -25,5 +25,12 @@ GET     /fornecedores/editar/:id      controllers.FornecedorController.editar(id
 GET     /fornecedores/deletar/:id     controllers.FornecedorController.deletar(id: Integer)
 
 
+GET     /produtos                 controllers.ProdutoController.index()
+POST    /produtos/save            controllers.ProdutoController.save()
+GET     /produtos/novo            controllers.ProdutoController.adicionar()
+GET     /produtos/editar/:id      controllers.ProdutoController.editar(id: Integer)
+GET     /produtos/deletar/:id     controllers.ProdutoController.deletar(id: Integer)
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
