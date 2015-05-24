@@ -2,7 +2,7 @@ package controllers;
 
 import dao.FornecedorDao;
 import dao.ProdutoDao;
-import models.Endereco;
+import models.Fornecedor;
 import models.Produto;
 import play.data.Form;
 import play.mvc.Controller;
@@ -10,6 +10,7 @@ import play.mvc.Result;
 import views.html.produto.form;
 import views.html.produto.index;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoController extends Controller {
@@ -33,42 +34,64 @@ public class ProdutoController extends Controller {
 
     public static Result adicionar() {
         Produto produto = new Produto();
-
         Form<Produto> produtoForm = Form.form(Produto.class).fill(produto);
-//        FornecedorDao fornecedorDao = new FornecedorDao();
 
+        List<Fornecedor> fornecedores = new ArrayList<>();
+        FornecedorDao fornecedorDao = new FornecedorDao();
 
-        return ok(form.render(produtoForm));
+        try {
+            fornecedorDao.begin();
+            fornecedores = fornecedorDao.listaFornecedor();
+            fornecedorDao.commit();
+
+        } catch (Exception e) {
+            if (fornecedorDao.isConnected()) {
+                fornecedorDao.rollback();
+            }
+
+            flash("error", "Erro ao listar fornecedores.");
+        }
+
+        return ok(form.render(produtoForm, fornecedores));
     }
 
     public static Result editar(Integer id) {
         ProdutoDao dao = new ProdutoDao();
+        List<Fornecedor> fornecedores = new ArrayList<>();
+        Form<Produto> produtoForm = Form.form(Produto.class);
         dao.begin();
 
         try {
-
-            Form<Produto> produtoForm = Form.form(Produto.class).fill(
+            produtoForm = produtoForm.fill(
                     dao.consultarProduto(id)
             );
 
+            FornecedorDao fornecedorDao = new FornecedorDao();
+            fornecedores = fornecedorDao.listaFornecedor();
+
             dao.commit();
-            return ok(form.render(produtoForm));
         } catch (Exception e) {
 
             if (dao.isConnected()) {
                 dao.rollback();
             }
 
-            return internalServerError(e.getMessage());
+            flash("error", "Erro ao listar fornecedores.");
         }
+
+        return ok(form.render(produtoForm, fornecedores));
     }
 
     public static Result save() {
         Produto produto = Form.form(Produto.class).bindFromRequest().get();
         ProdutoDao dao = new ProdutoDao();
+        FornecedorDao fornecedorDao = new FornecedorDao();
+        Integer idFornecedor = Integer.parseInt(Form.form(Produto.class).bindFromRequest().field("id_fornecedor").value());
+
         dao.begin();
 
         try {
+            produto.setFornecedor(fornecedorDao.consultarFornecedor(idFornecedor));
             dao.salvar(produto);
             dao.commit();
 
@@ -80,9 +103,9 @@ public class ProdutoController extends Controller {
             }
 
             flash("error", "Ocorreu um erro ao tentar salvar: " + e.getMessage());
-
             Form<Produto> produtoForm = Form.form(Produto.class).fill(produto);
-            return ok(form.render(produtoForm));
+
+            return ok(form.render(produtoForm, new ArrayList<>()));
         }
     }
 
