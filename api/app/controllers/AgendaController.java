@@ -5,23 +5,30 @@ import dao.ClienteDao;
 import dao.VendedorDao;
 import models.Agenda;
 import models.Cliente;
+import models.Produto;
 import models.Vendedor;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.joda.time.DateTime;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.agenda.form;
 import views.html.agenda.index;
 
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AgendaController extends Controller {
 
     public static Result index() {
         AgendaDao dao = new AgendaDao();
-        dao.begin();
 
         try {
+            dao.begin();
             List<Agenda> agendas = dao.todos();
             dao.commit();
             return ok(index.render(agendas));
@@ -96,35 +103,37 @@ public class AgendaController extends Controller {
     public static Result save() {
         Form<Agenda> agendaForm = Form.form(Agenda.class);
         Agenda agenda = agendaForm.bindFromRequest().get();
-        AgendaDao dao = new AgendaDao();
 
+        AgendaDao dao = new AgendaDao();
         ClienteDao clienteDao = new ClienteDao();
         VendedorDao vendedorDao = new VendedorDao();
 
-        List<Vendedor> vendedores = new ArrayList<>();
-        List<Cliente> clientes = new ArrayList<>();
-
-        dao.begin();
+        Integer idVendedor = Integer.parseInt(agendaForm.bindFromRequest().field("id_vendedor").value());
+        Integer idCliente = Integer.parseInt(agendaForm.bindFromRequest().field("id_cliente").value());
 
         try {
-            vendedores = vendedorDao.todos();
-            clientes = clienteDao.todos();
+            dao.begin();
+
+            agenda.setCliente(clienteDao.consultarCliente(idCliente));
+            agenda.setVendedor(vendedorDao.consultarVendedor(idVendedor));
 
             dao.salvar(agenda);
             dao.commit();
 
-            flash("success", "Agenda salvo com sucesso.");
-            return redirect(routes.AgendaController.index());
+            flash("success", "Agenda salva com sucesso.");
         } catch (Exception e) {
             if (dao.isConnected()) {
                 dao.rollback();
             }
 
-            flash("error", "Ocorreu um erro ao tentar salvar: " + e.getMessage());
-
-            agendaForm = Form.form(Agenda.class).fill(agenda);
-            return ok(form.render(agendaForm, vendedores, clientes));
+            if (e.getCause().getMessage().contains("Duplicate entry")) {
+                flash("warning", "Já existe uma visita agendada para esse mesmo horário.");
+            } else {
+                flash("error", "Ocorreu um erro ao tentar salvar: " + e.getCause().getMessage());
+            }
         }
+
+        return redirect(routes.AgendaController.index());
     }
 
     public static Result deletar(Integer id) {
@@ -137,7 +146,7 @@ public class AgendaController extends Controller {
             dao.deletar(agenda);
             dao.commit();
 
-            flash("success", "Agenda removido com sucesso.");
+            flash("success", "Agenda removida com sucesso.");
 
         } catch (Exception e) {
             if (dao.isConnected()) {
