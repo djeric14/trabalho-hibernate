@@ -1,4 +1,4 @@
-@(form: play.data.Form[Cliente]) @main("Pedidos do Cliente") {
+@(pedidos: List[Pedido]) @main("Pedidos do Cliente") {
 
 @if(flash.get("success") != null) {
 <div class="alert alert-success" role="alert">@flash.get("success")</div>
@@ -12,7 +12,7 @@
 			<div class="box">
 				<div class="col-md-6">
 					<div class="box-header">
-						<h3 class="box-title">Cliente: '@(form("nome").value)'</h3>
+						<h3 class="box-title">Cliente: </h3>
 					</div>
 					<!-- /.box-header -->
 
@@ -31,10 +31,10 @@
 						</thead>
 
 						<tbody>
-							@for(pedido <- '@(form("pedidos").value)') {
+							@for(pedido <- pedidos) {
 								<tr>
-									<td>'@(form("pedido.id").value)')</td>
-									<td>'@(form("pedido.vendedor.nome").value)')</td>
+									<td>@pedido.getId()</td>
+									<td>@pedido.getVendedor().getNome()</td>
 								</tr>
 							}
 						</tbody>

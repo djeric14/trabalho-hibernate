@@ -108,27 +108,4 @@ public class ClienteController extends Controller {
         return redirect(routes.ClienteController.index());
     }
 
-    public static Result pedidos(Integer id) {
-        ClienteDao dao = new ClienteDao();
-        dao.begin();
-
-        try {
-
-        	Form<Cliente> clientePedidos = Form.form(Cliente.class).fill(
-                    dao.consultarCliente(id)
-            );
-            dao.commit();
-
-            return ok(form.render(clientePedidos));
-
-        } catch (Exception e) {
-            if (dao.isConnected()) {
-                dao.rollback();
-            }
-
-            flash("error", "Ocorreu um erro ao tentar remover: " + e.getMessage());
-        }
-
-        return redirect(routes.ClienteController.index());
-    }
 }
