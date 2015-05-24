@@ -1,26 +1,18 @@
 package controllers;
 
-<<<<<<< HEAD
+import java.util.ArrayList;
 import java.util.List;
 
-=======
-import dao.FornecedorDao;
-import dao.ProdutoDao;
 import models.Fornecedor;
->>>>>>> origin/master
 import models.Produto;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.produto.form;
 import views.html.produto.index;
-<<<<<<< HEAD
+import dao.FornecedorDao;
 import dao.ProdutoDao;
-=======
 
-import java.util.ArrayList;
-import java.util.List;
->>>>>>> origin/master
 
 public class ProdutoController extends Controller {
 
