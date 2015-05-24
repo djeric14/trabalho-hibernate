@@ -1,5 +1,7 @@
 package models;
 
+import play.data.format.Formats;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="agenda_id_seq")
-@Table(name = "agenda")
+@Table(name = "agenda", uniqueConstraints = @UniqueConstraint(columnNames={"id_vendedor", "id_cliente", "data"}))
 public class Agenda extends BaseModel {
 
     private static final long serialVersionUID = 3322492327382107596L;
@@ -27,7 +29,8 @@ public class Agenda extends BaseModel {
     private Cliente cliente;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data")
+    @Formats.DateTime(pattern = "YYYY-MM-dd HH:mm:ss")
+    @Column(name = "data", unique = true)
     @Basic(optional = false)
     protected Date data;
     
