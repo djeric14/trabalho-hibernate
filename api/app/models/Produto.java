@@ -14,7 +14,7 @@ public class Produto extends BaseModel {
     @Column(name = "id_produto")
     private Integer id;
 
-    @Column(name = "descricao")
+    @Column(name = "nome")
     @Basic(optional = false)
     private String nome;
 

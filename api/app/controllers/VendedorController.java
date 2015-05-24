@@ -45,7 +45,6 @@ public class VendedorController extends Controller {
 
         try {
 
-
             Form<Vendedor> vendedorForm = Form.form(Vendedor.class).fill(
                     dao.consultarVendedor(id)
             );

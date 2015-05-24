@@ -1,0 +1,53 @@
+@(form: play.data.Form[Produto])
+
+@main("Salvar Produto") {
+
+    @if(flash.get("error") != null) {
+        <div class="alert alert-danger" role="alert">@flash.get("error")</div>
+    }
+
+    <!-- form start -->
+    <section class="content">
+        <form method="POST" action="/clientes/save">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box-header">
+                        <h3 class="box-title">Informações básicas</h3>
+                    </div><!-- /.box-header -->
+
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="descricao">Descrição:</label>
+                                <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição" value='@(form("descricao").value)' required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="preco">Preço:</label>
+                                <input type="text" class="form-control" name="preco" id="preco" placeholder="Preço"  value='@(form("preco").value)' required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estoque">Estoque:</label>
+                                <input type="date" class="form-control" name="estoque" id="estoque"  value='@(form("estoque").value)' placeholder="Estoque" required>
+                            </div>
+
+
+                            <input type="hidden" value='@(form("id").value)' name="id" />
+                        </div><!-- /.box-body -->
+
+                    </div><!-- /.box -->
+                </div>
+
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+            </div>
+        </form>
+    </section>
+
+}
