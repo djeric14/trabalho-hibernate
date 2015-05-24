@@ -13,7 +13,6 @@ import views.html.produto.index;
 import dao.FornecedorDao;
 import dao.ProdutoDao;
 
-
 public class ProdutoController extends Controller {
 
     public static Result index() {

@@ -29,6 +29,7 @@ public class Produto extends BaseModel {
     @Basic(optional = false)
     private Integer estoque;
 
+
     public Integer getId() {
 		return id;
 	}

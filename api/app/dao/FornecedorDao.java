@@ -1,11 +1,10 @@
 package dao;
 
 import java.util.List;
-
 import models.Fornecedor;
-
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
+
 
 public class FornecedorDao extends GenericDao {
 
