@@ -16,11 +16,13 @@ public class PedidoController extends Controller {
 
 		try {
 			List<Pedido> clientePedidos = dao.pedidosCliente(id);
+			System.out.println("Tamanho="+clientePedidos.size());
 			dao.commit();
 
 			return ok(index.render(clientePedidos));
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			if (dao.isConnected()) {
 				dao.rollback();
 			}

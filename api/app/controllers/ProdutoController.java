@@ -1,16 +1,14 @@
 package controllers;
 
-import dao.FornecedorDao;
-import dao.ProdutoDao;
-import models.Endereco;
+import java.util.List;
+
 import models.Produto;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.produto.form;
 import views.html.produto.index;
-
-import java.util.List;
+import dao.ProdutoDao;
 
 public class ProdutoController extends Controller {
 

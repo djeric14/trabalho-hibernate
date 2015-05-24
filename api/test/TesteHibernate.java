@@ -1,15 +1,8 @@
-import java.util.Calendar;
 import java.util.List;
 
-import models.Cliente;
 import models.Endereco;
-import models.Fornecedor;
 import models.ItensPedido;
 import models.Pedido;
-import models.Pessoa;
-import models.Produto;
-import models.Vendedor;
-import dao.ClienteDao;
 import dao.EnderecoDao;
 import dao.PedidoDao;
 
@@ -97,7 +90,8 @@ public class TesteHibernate {
 				System.out.println(p.getCliente().getNome());
 				System.out.println(p.getCliente().getCpf());
 				for(ItensPedido i: p.getItensPedido()){
-					System.out.println(i.getProduto().getNome());
+					System.out.println("Produto="+i.getProduto().getNome());
+					//System.out.println("Cliente="+i.gegetCliente().getNome());
 				}
 				
 			}
