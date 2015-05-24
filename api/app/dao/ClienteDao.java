@@ -37,5 +37,4 @@ public class ClienteDao extends GenericDao {
     	String consulta = "from Cliente c where c.cpf = :cpf";
     	return (Cliente)super.session.createQuery(consulta).setParameter("cpf", cpf).uniqueResult();
     }
-	
 }

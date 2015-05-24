@@ -7,7 +7,11 @@
 }
 
 @if(flash.get("error") != null) {
-<div class="alert alert-danger" role="alert">@flash.get("error")</div>
+	<div class="alert alert-danger" role="alert">@flash.get("error")</div>
+}
+
+@if(flash.get("warning") != null) {
+	<div class="alert alert-warning" role="alert">@flash.get("warning")</div>
 }
 
 <section class="content">
@@ -20,7 +24,7 @@
 	        </div><!-- /.box-header -->
 
 	        <div class="box-body">
-	          <table id="table-agendas" class="table table-bordered table-hover">
+	          <table id="table-agenda" class="table table-bordered table-hover">
 	            <thead>
 	              <tr>
 					<th>ID</th>
@@ -39,8 +43,9 @@
 					  		<td>@agenda.getCliente().getNome()</td>
 					  		<td>@agenda.getData()</td>
 					  		<td>
-					  			<a href="agendas/editar/@agenda.getId()" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-					  			<a href="agendas/deletar/@agenda.getId()" class="btn btn-sm btn-danger" title="Remover"><i class="fa fa-remove"></i></a>
+					  			<a href="agenda/editar/@agenda.getId()" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+					  			<a href="agenda/deletar/@agenda.getId()" class="btn btn-sm btn-danger" title="Remover"><i class="fa fa-remove"></i></a>
+								<a href="agenda/registrar/@agenda.getId()" class="btn btn-sm btn-default" title="Registrar Visita"><i class="fa fa-map-marker"></i></a>
 					  		</td>
 					  	</tr>
 					}
@@ -51,6 +56,6 @@
 
 	    </div><!-- /.col -->
 	  </div><!-- /.row -->
-	  </section><!-- /.content -->
+</section><!-- /.content -->
 }
 

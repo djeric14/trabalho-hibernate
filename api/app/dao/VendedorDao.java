@@ -35,5 +35,5 @@ public class VendedorDao extends GenericDao {
 	public Vendedor consultarPessoaCPF(String cpf) throws Exception {
     	String consulta = "from Vendedor v where v.cpf = :cpf";
     	return (Vendedor)super.session.createQuery(consulta).setParameter("cpf", cpf).uniqueResult();
-	}	
+	}
 }
