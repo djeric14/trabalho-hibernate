@@ -3,23 +3,16 @@ package controllers;
 import dao.AgendaDao;
 import dao.ClienteDao;
 import dao.VendedorDao;
-import models.Agenda;
-import models.Cliente;
-import models.Produto;
-import models.Vendedor;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.joda.time.DateTime;
+
+import models.*;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.agenda.form;
 import views.html.agenda.index;
+import views.html.agenda.registrar;
 
-import javax.persistence.PersistenceException;
-import javax.validation.ConstraintViolationException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AgendaController extends Controller {
@@ -154,6 +147,61 @@ public class AgendaController extends Controller {
             }
 
             flash("error", "Ocorreu um erro ao tentar remover: " + e.getMessage());
+        }
+
+        return redirect(routes.AgendaController.index());
+    }
+
+
+    public static Result registrar(Integer id) {
+        AgendaDao dao = new AgendaDao();
+        Visita visita = new Visita();
+
+        try {
+            dao.begin();
+            visita.setAgenda(dao.consultarAgenda(id));
+            dao.commit();
+
+        } catch (Exception e) {
+            if (dao.isConnected()) {
+                dao.rollback();
+            }
+
+            flash("error", "Ocorreu um erro ao tentar recuperar a visita: " + e.getMessage());
+        }
+
+        Form<Visita> visitaForm = Form.form(Visita.class).fill(visita);
+        return ok(registrar.render(visitaForm));
+    }
+
+
+    public static Result salvarVisita() {
+        Form<Visita> agendaForm = Form.form(Visita.class);
+        Visita visita = agendaForm.bindFromRequest().get();
+
+        AgendaDao dao = new AgendaDao();
+
+        Integer idAgenda = Integer.parseInt(agendaForm.bindFromRequest().field("id_agenda").value());
+
+        try {
+            dao.begin();
+
+            Agenda agenda = dao.consultarAgenda(idAgenda);
+
+            visita.setLatitude(1.1);
+            visita.setLongitude(1.1);
+            visita.setAgenda(agenda);
+
+            dao.salvar(visita);
+            dao.commit();
+
+            flash("success", "Visita registrada com sucesso.");
+        } catch (Exception e) {
+            if (dao.isConnected()) {
+                dao.rollback();
+            }
+
+            flash("error", "Ocorreu um erro ao tentar salvar: " + e.getCause().getMessage());
         }
 
         return redirect(routes.AgendaController.index());

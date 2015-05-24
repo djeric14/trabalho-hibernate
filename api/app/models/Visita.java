@@ -1,5 +1,7 @@
 package models;
 
+import play.data.format.Formats;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -29,11 +31,13 @@ public class Visita extends BaseModel {
     private Double Longitude;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Formats.DateTime(pattern = "YYYY-MM-dd HH:mm:ss")
     @Column(name = "hora_inicio")
     @Basic(optional = false)
     protected Date horaInicio;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Formats.DateTime(pattern = "YYYY-MM-dd HH:mm:ss")
     @Column(name = "hora_fim")
     @Basic(optional = false)
     protected Date horaFim;

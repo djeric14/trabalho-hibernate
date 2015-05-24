@@ -37,6 +37,8 @@ POST    /agenda/save            controllers.AgendaController.save()
 GET     /agenda/novo            controllers.AgendaController.adicionar()
 GET     /agenda/editar/:id      controllers.AgendaController.editar(id: Integer)
 GET     /agenda/deletar/:id     controllers.AgendaController.deletar(id: Integer)
+GET     /agenda/registrar/:id   controllers.AgendaController.registrar(id: Integer)
+POST    /agenda/registrar       controllers.AgendaController.salvarVisita()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
