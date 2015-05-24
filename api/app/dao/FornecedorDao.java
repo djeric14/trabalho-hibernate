@@ -24,4 +24,10 @@ public class FornecedorDao extends GenericDao {
 				.setFetchMode("endereco", FetchMode.JOIN)
 				.uniqueResult();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> listaFornecedor(){
+		String consulta = "from Fornecedor";
+		return super.session.createQuery(consulta).list();
+	}
 }
