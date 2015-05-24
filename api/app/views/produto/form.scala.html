@@ -48,9 +48,9 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <select class="form-control" id="fornecedor" name="id_fornecedor">
-                                @for(f <- fornecedores) {
-                                    <option value='@f.getId()' @if( mForm("fornecedor.id").value.equals(f.getId().toString()) ) {selected}>@f.getNomeFantasia</option>
-                                }
+                                    @for(f <- fornecedores) {
+                                        <option value='@f.getId()' @if( mForm("fornecedor.id").value != null && mForm("fornecedor.id").value.equals(f.getId().toString()) ) {selected}>@f.getNomeFantasia</option>
+                                    }
                                 </select>
                             </div>
                         </div>
