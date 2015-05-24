@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import models.Produto;
+
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 

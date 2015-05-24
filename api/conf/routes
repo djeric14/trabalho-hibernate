@@ -18,6 +18,7 @@ GET     /clientes/editar/:id      controllers.ClienteController.editar(id: Integ
 GET     /clientes/deletar/:id     controllers.ClienteController.deletar(id: Integer)
 
 GET     /pedidos/:id    		 controllers.PedidoController.index(id: Integer)
+GET 	/pedidos/listar/:id	 controllers.ItensPedidoController.index(id: Integer)	 	
 
 GET     /fornecedores                 controllers.FornecedorController.index()
 POST    /fornecedores/save            controllers.FornecedorController.save()

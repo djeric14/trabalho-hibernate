@@ -1,8 +1,8 @@
 package controllers;
 
-import dao.AgendaDao;
-import dao.ClienteDao;
-import dao.VendedorDao;
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Agenda;
 import models.Cliente;
 import models.Vendedor;
@@ -11,9 +11,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.agenda.form;
 import views.html.agenda.index;
-
-import java.util.ArrayList;
-import java.util.List;
+import dao.AgendaDao;
+import dao.ClienteDao;
+import dao.VendedorDao;
 
 public class AgendaController extends Controller {
 

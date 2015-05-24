@@ -80,6 +80,7 @@ public class TesteHibernate {
 		
 		PedidoDao cDao = new PedidoDao();
 		
+		
 		try {
 			//System.out.println(pessoa.getId());
 			//Pedido c = cDao.pedidosCliente(new Integer(1));

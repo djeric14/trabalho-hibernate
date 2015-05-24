@@ -18,6 +18,7 @@ GET     /clientes/editar/:id      controllers.ClienteController.editar(id: Integ
 GET     /clientes/deletar/:id     controllers.ClienteController.deletar(id: Integer)
 
 GET     /pedidos/:id    		 controllers.PedidoController.index(id: Integer)
+GET 	/pedidos/listar/:id	 controllers.ItensPedidoController.index(id: Integer)	 	
 
 GET     /fornecedores                 controllers.FornecedorController.index()
 POST    /fornecedores/save            controllers.FornecedorController.save()
@@ -32,6 +33,11 @@ GET     /produtos/novo            controllers.ProdutoController.adicionar()
 GET     /produtos/editar/:id      controllers.ProdutoController.editar(id: Integer)
 GET     /produtos/deletar/:id     controllers.ProdutoController.deletar(id: Integer)
 
+GET     /agenda                 controllers.AgendaController.index()
+POST    /agenda/save            controllers.AgendaController.save()
+GET     /agenda/novo            controllers.AgendaController.adicionar()
+GET     /agenda/editar/:id      controllers.AgendaController.editar(id: Integer)
+GET     /agenda/deletar/:id     controllers.AgendaController.deletar(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

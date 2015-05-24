@@ -2,11 +2,13 @@ package controllers;
 
 import java.util.List;
 
+import models.Cliente;
 import models.Pedido;
 import play.mvc.Controller;
 import play.mvc.Result;
-import dao.PedidoDao;
 import views.html.pedido.index;
+import dao.ClienteDao;
+import dao.PedidoDao;
 
 public class PedidoController extends Controller {
 	
@@ -15,11 +17,14 @@ public class PedidoController extends Controller {
 		dao.begin();
 
 		try {
+			ClienteDao clienteDao = new ClienteDao();
+			Cliente cliente = clienteDao.consultarCliente(id);
+			
 			List<Pedido> clientePedidos = dao.pedidosCliente(id);
-			System.out.println("Tamanho="+clientePedidos.size());
+			
 			dao.commit();
-
-			return ok(index.render(clientePedidos));
+			
+			return ok(index.render(clientePedidos, cliente.getNome()));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

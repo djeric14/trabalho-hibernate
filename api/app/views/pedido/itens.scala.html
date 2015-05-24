@@ -1,5 +1,5 @@
-@(pedidos: List[Pedido], nomeCliente: String)
-@main("Pedidos do Cliente"){
+@(itens: List[ItensPedido])
+@main("Itens do Pedido"){
 
 @if(flash.get("success") != null) {
 	<div class="alert alert-success" role="alert">@flash.get("success")</div>
@@ -17,7 +17,7 @@
 							Pedido</a>
 					</div>
 					<div class="box-header">
-						<h3 class="box-title">Cliente: @nomeCliente</h3>
+						<h3 class="box-title">Cliente: </h3>
 					</div>
 					<!-- /.box-header -->
 				</div>
@@ -31,20 +31,20 @@
 							<tr>
 								<th>Pedido</th>
 								<th>Vendedor</th>
-								<th></th>
+								<th>Quantidade</th>
+								<th>Valor</th>
+								<th>Total</th>
 							</tr>
 						</thead>
 
 						<tbody>
-							@for(pedido <- pedidos) {
+							@for(item <- itens) {
 							<tr>
-								<td>@pedido.getId()</td>
-								<td>@pedido.getVendedor().getNome()</td>
-								<td><a href="listar/@pedido.getId()"
-									class="btn btn-sm btn-info" title="Listar">
-									<i class="fa fa-list"></i>
-									</a>
-								</td>
+								<td>@item.getId()</td>
+								<td>@item.getProduto().getNome()</td>
+								<td>@item.getQuantidade()</td>
+								<td>R$ @item.getProduto().getPreco()</td>
+								<td>R$ @item.getTotal()</td>
 							</tr>
 							}
 						</tbody>

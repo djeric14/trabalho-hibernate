@@ -1,15 +1,15 @@
 package controllers;
 
-import dao.ClienteDao;
-import models.Endereco;
+import java.util.List;
+
 import models.Cliente;
+import models.Endereco;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.cliente.form;
 import views.html.cliente.index;
-
-import java.util.List;
+import dao.ClienteDao;
 
 public class ClienteController extends Controller {
 

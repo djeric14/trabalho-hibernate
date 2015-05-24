@@ -1,14 +1,15 @@
 package controllers;
 
-import dao.FornecedorDao;
-import models.Fornecedor;
+import java.util.List;
+
 import models.Endereco;
+import models.Fornecedor;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.fornecedor.*;
-
-import java.util.List;
+import views.html.fornecedor.form;
+import views.html.fornecedor.index;
+import dao.FornecedorDao;
 
 public class FornecedorController extends Controller {
 
