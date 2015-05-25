@@ -2,13 +2,13 @@ package controllers;
 
 import java.util.List;
 
-import models.Cliente;
 import models.ItensPedido;
+import models.Pedido;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.pedido.itens;
-import dao.ClienteDao;
 import dao.ItensPedidoDao;
+import dao.PedidoDao;
 
 public class ItensPedidoController extends Controller {
 	
@@ -17,10 +17,16 @@ public class ItensPedidoController extends Controller {
 		dao.begin();
 
 		try {
+			PedidoDao pedidoDao = new PedidoDao();
+			Pedido pedido = pedidoDao.consultarPedido(id);
+			
+			System.out.println(pedido.getCliente().getNome());
+			
 			List<ItensPedido> itensPedido = dao.listarItensPedido(id);
 			
-			ClienteDao clienteDao = new ClienteDao();
-			Cliente cliente = clienteDao.consultarCliente(id);
+			
+			//ClienteDao clienteDao = new ClienteDao();
+			//Cliente cliente = clienteDao.consultarCliente(id);
 			
 			for(ItensPedido i: itensPedido){
 				i.setTotal();
@@ -28,7 +34,7 @@ public class ItensPedidoController extends Controller {
 			
 			dao.commit();
 			
-			return ok(itens.render(itensPedido, cliente.getNome()));
+			return ok(itens.render(itensPedido, pedido.getCliente(), id));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

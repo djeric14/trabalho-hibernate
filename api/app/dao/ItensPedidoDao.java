@@ -5,6 +5,7 @@ import java.util.List;
 import models.ItensPedido;
 
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.Restrictions;
 
 public class ItensPedidoDao extends GenericDao {
 	
@@ -15,11 +16,11 @@ public class ItensPedidoDao extends GenericDao {
 
 	@SuppressWarnings("unchecked")
 	public List<ItensPedido> listarItensPedido(Integer id) {
+		System.out.println("Pedido ="+id);
 		
 		return super.session.createCriteria(ItensPedido.class)
-				.setFetchMode("produto", FetchMode.JOIN).list();
+				.setFetchMode("produto", FetchMode.JOIN).add(Restrictions.eq("pedido.id", id)).list();
 	}
 	
-	
-	
+
 }

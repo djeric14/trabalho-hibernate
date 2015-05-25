@@ -12,6 +12,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.pedido.form;
 import views.html.pedido.index;
+import views.html.pedido.listar;
 import dao.ClienteDao;
 import dao.PedidoDao;
 import dao.VendedorDao;
@@ -72,5 +73,29 @@ public class PedidoController extends Controller {
 
         return ok(form.render(pedidoForm, cliente, vendedores, itensPedido));
     }
+	
+	public static Result todos(){
+		PedidoDao dao = new PedidoDao();
+		dao.begin();
+
+		try {
+			
+			List<Pedido> clientePedidos = dao.todos();
+			dao.commit();
+			
+			return ok(listar.render(clientePedidos));
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			if (dao.isConnected()) {
+				dao.rollback();
+			}
+
+			flash("error",
+					"Ocorreu um erro : " + e.getMessage());
+		}
+
+		return redirect(routes.Application.index());
+	}
 
 }
