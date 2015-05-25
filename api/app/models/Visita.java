@@ -38,9 +38,9 @@ public class Visita extends BaseModel {
     @Basic(optional = false)
     private Double latitude = 0.0;
 
-    @Column(name = "Longitude")
+    @Column(name = "longitude")
     @Basic(optional = false)
-    private Double Longitude = 0.0;
+    private Double longitude = 0.0;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Formats.DateTime(pattern = "YYYY-MM-dd HH:mm:ss")
@@ -79,11 +79,11 @@ public class Visita extends BaseModel {
     }
 
     public Double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLongitude(Double longitude) {
-        Longitude = longitude;
+        longitude = longitude;
     }
 
     public Date getHoraInicio() {

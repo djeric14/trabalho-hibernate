@@ -193,10 +193,16 @@ public class AgendaController extends Controller {
             Agenda agenda = dao.consultarAgenda(idAgenda);
             visita.setAgenda(agenda);
 
-            dao.salvar(visita);
-            dao.commit();
+            if (visita.getLatitude() == null || visita.getLongitude() == null) {
+                dao.rollback();
+                flash("warning", "Não foi possível recuperar sua localização. Verifique sua conexão com a internet e tente novamente.");
+            } else {
+                dao.salvar(visita);
+                dao.commit();
 
-            flash("success", "Visita registrada com sucesso.");
+                flash("success", "Visita registrada com sucesso.");
+            }
+
         } catch (Exception e) {
             if (dao.isConnected()) {
                 dao.rollback();
