@@ -1,15 +1,6 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(initialValue=1, name="SEQUENCE", sequenceName="produto_id_seq")
@@ -31,7 +22,7 @@ public class Produto extends BaseModel {
     @Basic(optional = false)
     private Double preco;
 
-    @ManyToOne(fetch=FetchType.LAZY, optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     private Fornecedor fornecedor;
 
     @Column(name = "estoque")
