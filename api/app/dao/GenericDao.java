@@ -43,6 +43,10 @@ public abstract class GenericDao {
 		session.close();
 	}
 
+	public Session getSession() {
+		return session;
+	}
+
 	@SuppressWarnings({ "rawtypes" })
 	public Long count(Class base) {
 		StringBuilder consulta = new StringBuilder();
