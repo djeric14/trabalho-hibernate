@@ -49,6 +49,10 @@ public class ItensPedido extends BaseModel {
 	public Double getTotal() {
 		return total;
 	}
+	
+	public void setTotal(){
+		this.total = this.getProduto().getPreco()*this.getQuantidade();
+	}
     
     public Integer getId() {
 		return id;

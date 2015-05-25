@@ -2,6 +2,12 @@ import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.contentAsString;
 import static play.test.Helpers.contentType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import models.Visita;
+
 import org.junit.Test;
 
 import play.twirl.api.Content;
@@ -23,7 +29,8 @@ public class ApplicationTest {
 
     @Test
     public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
+    	List<Visita> visitas = new ArrayList<Visita>();
+        Content html = views.html.index.render(visitas, new HashMap<String, Object>(1));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }

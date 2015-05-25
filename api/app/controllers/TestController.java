@@ -1,5 +1,4 @@
 package controllers;
-import dao.ClienteDao;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.test.index;

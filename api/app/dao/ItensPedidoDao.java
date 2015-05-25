@@ -15,8 +15,11 @@ public class ItensPedidoDao extends GenericDao {
 
 	@SuppressWarnings("unchecked")
 	public List<ItensPedido> listarItensPedido(Integer id) {
+		
 		return super.session.createCriteria(ItensPedido.class)
 				.setFetchMode("produto", FetchMode.JOIN).list();
 	}
+	
+	
 	
 }

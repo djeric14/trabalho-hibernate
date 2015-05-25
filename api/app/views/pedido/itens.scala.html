@@ -1,4 +1,4 @@
-@(itens: List[ItensPedido])
+@(itens: List[ItensPedido], nomeCliente: String)
 @main("Itens do Pedido"){
 
 @if(flash.get("success") != null) {
@@ -13,11 +13,11 @@
 			<div class="box">
 				<div class="col-md-6">
 					<div class="box-header">
-						<a href="pedidos/novo" class="btn btn-primary">Adicionar
-							Pedido</a>
+						<!--  <a href="pedidos/novo" class="btn btn-primary">Adicionar
+							Pedido</a> -->
 					</div>
 					<div class="box-header">
-						<h3 class="box-title">Cliente: </h3>
+						<h3 class="box-title">Cliente: @nomeCliente</h3>
 					</div>
 					<!-- /.box-header -->
 				</div>
@@ -25,12 +25,12 @@
 				<!-- /.box-header -->
 
 				<div class="box-body">
-					<table id="table-vendedores"
+					<table id="table-itens"
 						class="table table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>Pedido</th>
-								<th>Vendedor</th>
+								<th>Produto</th>
 								<th>Quantidade</th>
 								<th>Valor</th>
 								<th>Total</th>

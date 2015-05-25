@@ -2,10 +2,12 @@ package controllers;
 
 import java.util.List;
 
+import models.Cliente;
 import models.ItensPedido;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.pedido.itens;
+import dao.ClienteDao;
 import dao.ItensPedidoDao;
 
 public class ItensPedidoController extends Controller {
@@ -16,9 +18,17 @@ public class ItensPedidoController extends Controller {
 
 		try {
 			List<ItensPedido> itensPedido = dao.listarItensPedido(id);
+			
+			ClienteDao clienteDao = new ClienteDao();
+			Cliente cliente = clienteDao.consultarCliente(id);
+			
+			for(ItensPedido i: itensPedido){
+				i.setTotal();
+			}
+			
 			dao.commit();
 			
-			return ok(itens.render(itensPedido));
+			return ok(itens.render(itensPedido, cliente.getNome()));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

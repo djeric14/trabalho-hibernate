@@ -1,0 +1,33 @@
+@(mForm: play.data.Form[Pedido], cliente: Cliente, vendedores: List[Vendedor], itens: List[ItensPedido]) 
+
+@main("Cadastrar Pedido") {
+	@if(flash.get("error") != null) {
+		<div class="alert alert-danger" role="alert">@flash.get("error")</div>
+	}
+
+	<!-- form start -->
+    <section class="content">
+        <form method="POST" action="/pedidos/save">
+        	<div class="row">
+                <div class="col-md-6">
+                    <div class="box-header">
+                    	<h3 class="box-title">Cliente: @cliente.getNome()</h3>
+                    </div>
+                    
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                            	<label for="vendedores">Vendedores:</label>
+                            	<select class="form-control" id="vendedor" name="id_vendedor">
+                                    @for(v <- vendedores) {
+                                        <option value='@v.getId()' @if( mForm("vendedor.id").value != null && mForm("vendedor.id").value.equals(v.getId().toString()) ) {selected}>@v.getNome</option>
+                                    }
+                                </select>
+                            </div>
+                       </div> 
+                    </div>       
+                </div>
+            </div>        
+        </form>
+	</section>
+}
