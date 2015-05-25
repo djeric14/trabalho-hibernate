@@ -1,17 +1,7 @@
 package models;
 
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="itens_pedido_id_seq")
@@ -30,7 +20,7 @@ public class ItensPedido extends BaseModel {
     @Basic(optional = false)
     private Pedido pedido;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @Basic(optional = false)
     private Produto produto;
    

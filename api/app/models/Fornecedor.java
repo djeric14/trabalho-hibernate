@@ -41,12 +41,9 @@ public class Fornecedor extends BaseModel {
     @Basic(optional = false)
     private String cnpj;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="id_endereco", nullable = false)
     private Endereco endereco;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor", fetch=FetchType.LAZY)
-    private List<Produto> listarProdutos;
 
     public Integer getId() {
 		return id;
@@ -88,13 +85,5 @@ public class Fornecedor extends BaseModel {
         this.endereco = endereco;
     }
 
-	public List<Produto> getListarProdutos() {
-		return listarProdutos;
-	}
-
-	public void setListarProdutos(List<Produto> listarProdutos) {
-		this.listarProdutos = listarProdutos;
-	}
-    
     
 }
