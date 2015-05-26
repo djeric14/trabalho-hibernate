@@ -1,12 +1,7 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "vendedor")
@@ -29,9 +24,9 @@ public class Vendedor extends Pessoa {
 	@Column(name = "total_vendas")
 	@Basic(optional = true)
 	private Integer totalVendas = 0;
-	
-	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch=FetchType.LAZY)
-	// private List<Agenda> agendaVendedor;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendedor")
+	private Set<Pedido> pedidos;
 	
 	public Integer getId() {
 		return id;
@@ -57,11 +52,11 @@ public class Vendedor extends Pessoa {
 		this.totalVendas = totalVendas;
 	}
 
-	// public List<Agenda> getAgendaVendedor() {
-	// 	return agendaVendedor;
-	// }
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
 
-	// public void setAgendaVendedor(List<Agenda> agendaVendedor) {
-	// 	this.agendaVendedor = agendaVendedor;
-	// }
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 }

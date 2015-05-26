@@ -1,17 +1,8 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="fornecedor_id_seq")
@@ -38,9 +29,12 @@ public class Fornecedor extends BaseModel {
     @Basic(optional = false)
     private String cnpj;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="id_endereco", nullable = false)
     private Endereco endereco;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "fornecedor")
+    private Set<Produto> produtos;
 
     public Integer getId() {
 		return id;
@@ -82,5 +76,12 @@ public class Fornecedor extends BaseModel {
         this.endereco = endereco;
     }
 
-    
+
+    public Set<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
+    }
 }

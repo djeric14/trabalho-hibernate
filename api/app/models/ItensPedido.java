@@ -16,11 +16,12 @@ public class ItensPedido extends BaseModel {
     @Basic(optional = false)
     private Integer id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="id_pedido", nullable = false)
     private Pedido pedido;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
+    @JoinColumn(name="id_produto", nullable = false)
     @Basic(optional = false)
     private Produto produto;
    

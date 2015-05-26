@@ -2,18 +2,7 @@ package models;
 
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SEQUENCE", sequenceName="pedido_id_seq")
@@ -29,11 +18,11 @@ public class Pedido extends BaseModel {
     private Integer id;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @JoinColumn(name="id_vendedor", nullable = false)
     private Vendedor vendedor;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @Basic(optional = false)
+    @JoinColumn(name="id_cliente", nullable = false)
     private Cliente cliente;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch=FetchType.LAZY)

@@ -43,7 +43,7 @@ public class Pessoa extends BaseModel {
     @Basic(optional = false)
     private Date dataNascimento;
 	
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_endereco", nullable = false)
 	private Endereco endereco;
 	

@@ -1,12 +1,7 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "endereco")
@@ -41,6 +36,9 @@ public class Endereco extends BaseModel {
     @Column(name = "cep")
     @Basic(optional = false)
     private String cep;
+
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "endereco")
+	private Set<Pessoa> pessoas;
 
     public Integer getId() {
 		return id;
@@ -90,6 +88,12 @@ public class Endereco extends BaseModel {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	
-	
+
+	public Set<Pessoa> getPessoas() {
+		return pessoas;
+	}
+
+	public void setPessoas(Set<Pessoa> pessoas) {
+		this.pessoas = pessoas;
+	}
 }
