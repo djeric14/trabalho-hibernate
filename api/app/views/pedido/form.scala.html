@@ -1,46 +1,123 @@
 @(mForm: play.data.Form[Pedido], cliente: Cliente, vendedores: List[Vendedor]) 
+@main("Cadastrar Pedido"){ 
 
-@main("Cadastrar Pedido") {
-	@if(flash.get("error") != null) {
-		<div class="alert alert-danger" role="alert">@flash.get("error")</div>
-	}	
+@if(flash.get("error") != null) {
+	<div class="alert alert-danger" role="alert">@flash.get("error")</div>
+}
 
-	<!-- form start -->
-    <section class="content">
-        <form method="POST" action="/pedidos/save">
-        	<div class="row">
-                <div class="col-md-6">
-                    <div class="box-header">
-                    	<h3 class="box-title">Informações básicas</h3>
-                    </div>
-                    
-                    <div class="box box-primary">
-                        <div class="box-body">
-                        	<div class="form-group">
-                        		<h3 class="box-title">Cliente: @cliente.getNome()</h3>
-                        	</div>
-                            <div class="form-group">
-                            	<label for="vendedores">Vendedor:</label>
-                            	<select class="form-control" id="vendedor" name="id_vendedor">
-                                    @for(v <- vendedores) {
-                                        <option value='@v.getId()' @if( mForm("vendedor.id").value != null && mForm("vendedor.id").value.equals(v.getId().toString()) ) {selected}>@v.getNome</option>
-                                    }
-                                </select>
-                            </div>
-                            
-                            <input type="hidden" value='@(cliente.getId())' name="id_cliente" />
-                       </div> 
-                    </div>       
-                </div>
-                
-                <div class="col-md-12">
-                    <div class="box">
-                        <div class="box-body">
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
-                </div>
-            </div>        
-        </form>
-	</section>
+<!-- form start -->
+<section class="content">
+	<form method="POST" action="/pedidos/save">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="box-header">
+					<h3 class="box-title">Informações básicas</h3>
+				</div>
+
+				<div class="box box-primary">
+					<div class="box-body">
+						<div class="form-group">
+							<h3 class="box-title">Cliente: @cliente.getNome()</h3>
+						</div>
+						<div class="form-group">
+							<label for="vendedores">Vendedor:</label> <select
+								class="form-control" id="vendedor" name="id_vendedor">
+								@for(v <- vendedores) {
+								<option value='@v.getId()'
+									@if( mForm("vendedor.id").value !=null&& mForm("vendedor.id").value.equals(v.getId().toString()) ) {selected}>@v.getNome</option>
+								}
+							</select>
+						</div>
+
+						<input type="hidden" value='@(cliente.getId())' name="id_cliente" />
+					</div>
+
+					<div class="table-responsive">
+						<table id="products-table"
+							class="table table-hover table-bordered">
+							<tbody>
+								<tr>
+									<th>C�digo</th>
+									<th>Produto</th>
+									<th>Quantidade</th>
+									<th>Preço</th>
+									<th class="actions">Ações</th>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="actions">
+										<button class="btn btn-large btn-danger"
+											onclick="RemoveTableRow(this)" type="button">Remover</button>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="actions">
+										<button class="btn btn-large btn-danger"
+											onclick="RemoveTableRow(this)" type="button">Remover</button>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="actions">
+										<button class="btn btn-large btn-danger"
+											onclick="RemoveTableRow(this)" type="button">Remover</button>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="actions">
+										<button class="btn btn-large btn-danger"
+											onclick="RemoveTableRow(this)" type="button">Remover</button>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="actions">
+										<button class="btn btn-large btn-danger"
+											onclick="RemoveTableRow(this)" type="button">Remover</button>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="5" style="text-align: left;">
+										<button class="btn btn-large btn-success"
+											onclick="AddTableRow(this)" type="button">Adicionar
+											Produto</button>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-body">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /.box -->
+			</div>
+		</div>
+	</form>
+</section>
 }

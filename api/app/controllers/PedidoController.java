@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.Cliente;
 import models.Pedido;
+import models.Produto;
 import models.Vendedor;
 import play.data.Form;
 import play.mvc.Controller;
@@ -14,6 +15,7 @@ import views.html.pedido.index;
 import views.html.pedido.listar;
 import dao.ClienteDao;
 import dao.PedidoDao;
+import dao.ProdutoDao;
 import dao.VendedorDao;
 
 public class PedidoController extends Controller {
@@ -54,6 +56,9 @@ public class PedidoController extends Controller {
         VendedorDao vendedorDao = new VendedorDao();
         ClienteDao clienteDao = new ClienteDao();
         Cliente cliente = new Cliente();
+        
+       // ProdutoDao produtoDao = new ProdutoDao();
+       // List<Produto> produtos = produtoDao.todos();
         
         try {
             vendedorDao.begin();
