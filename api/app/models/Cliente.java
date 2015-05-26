@@ -31,10 +31,7 @@ public class Cliente extends Pessoa {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch=FetchType.LAZY)
 	private List<Pedido> pedidos;
-	
-	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "agenda", fetch=FetchType.LAZY)
-	// private List<Agenda> visitasAgendadasCliente;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,12 +55,4 @@ public class Cliente extends Pessoa {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-
-	// public List<Agenda> getVisitasAgendadasCliente() {
-	// 	return visitasAgendadasCliente;
-	// }
-
-	// public void setVisitasAgendadasCliente(List<Agenda> visitasAgendadasCliente) {
-	// 	this.visitasAgendadasCliente = visitasAgendadasCliente;
-	// }
 }

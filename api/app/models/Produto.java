@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @SequenceGenerator(initialValue=1, name="SEQUENCE", sequenceName="produto_id_seq")
@@ -22,13 +23,16 @@ public class Produto extends BaseModel {
     @Basic(optional = false)
     private Double preco;
 
-    @ManyToOne(fetch=FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
+    @JoinColumn(name="id_fornecedor", nullable = false)
     private Fornecedor fornecedor;
 
     @Column(name = "estoque")
     @Basic(optional = false)
     private Integer estoque;
 
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    private Set<ItensPedido> itensPedidos;
 
     public Integer getId() {
 		return id;
@@ -68,5 +72,13 @@ public class Produto extends BaseModel {
 
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
+    }
+
+    public Set<ItensPedido> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public void setItensPedidos(Set<ItensPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
     }
 }

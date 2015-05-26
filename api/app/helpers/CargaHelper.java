@@ -1,6 +1,7 @@
 package helpers;
 
 import dao.ClienteDao;
+import dao.FornecedorDao;
 import models.*;
 
 import java.util.Date;
@@ -15,6 +16,14 @@ public class CargaHelper {
     public static void carregar(Boolean commit) throws Exception {
         ClienteDao dao = new ClienteDao();
 
+        Vendedor vendedor;
+        Fornecedor fornecedor;
+        Cliente cliente;
+        Produto produto;
+        Pedido pedido;
+        ItensPedido itens;
+        Agenda agenda;
+
         try {
             dao.begin();
 
@@ -28,16 +37,15 @@ public class CargaHelper {
             dao.salvar(endereco);
 
             for (int i = 1; i<100; i++) {
-                Cliente cliente = new Cliente();
+                cliente = new Cliente();
                 cliente.setCpf("12345567"+i);
                 cliente.setDataNascimento(new Date());
                 cliente.setEndereco(endereco);
                 cliente.setNome("Cliente "+i);
 
-
                 dao.salvar(cliente);
 
-                Vendedor vendedor = new Vendedor();
+                vendedor = new Vendedor();
                 vendedor.setCpf("098978776"+i);
                 vendedor.setNome("Vendedor "+i);
                 vendedor.setDataNascimento(new Date());
@@ -45,7 +53,7 @@ public class CargaHelper {
 
                 dao.salvar(vendedor);
 
-                Fornecedor fornecedor = new Fornecedor();
+                fornecedor = new Fornecedor();
                 fornecedor.setEndereco(endereco);
                 fornecedor.setCnpj("34798375/100"+i);
                 fornecedor.setNome("Fornecedor "+i);
@@ -53,7 +61,7 @@ public class CargaHelper {
 
                 dao.salvar(fornecedor);
 
-                Produto produto = new Produto();
+                produto = new Produto();
                 produto.setNome("Produto "+i);
                 produto.setPreco(10.1*i);
                 produto.setEstoque(3*i);
@@ -61,13 +69,13 @@ public class CargaHelper {
 
                 dao.salvar(produto);
 
-                Pedido pedido = new Pedido();
+                pedido = new Pedido();
                 pedido.setCliente(cliente);
                 pedido.setVendedor(vendedor);
 
                 dao.salvar(pedido);
 
-                ItensPedido itens = new ItensPedido();
+                itens = new ItensPedido();
                 itens.setPedido(pedido);
                 itens.setProduto(produto);
                 itens.setQuantidade(i);
@@ -75,7 +83,7 @@ public class CargaHelper {
                 dao.salvar(itens);
 
                 if (i % 50 == 0) {
-                    Agenda agenda = new Agenda();
+                    agenda = new Agenda();
                     agenda.setCliente(cliente);
                     agenda.setVendedor(vendedor);
                     agenda.setData(new Date());

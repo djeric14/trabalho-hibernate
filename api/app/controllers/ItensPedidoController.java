@@ -14,8 +14,9 @@ public class ItensPedidoController extends Controller {
 		ItensPedidoDao dao = new ItensPedidoDao();
 		dao.begin();
 
-		try {
+		try {	
 			List<ItensPedido> itensPedido = dao.listarItensPedido(id);
+			
 			dao.commit();
 			
 			return ok(itens.render(itensPedido));

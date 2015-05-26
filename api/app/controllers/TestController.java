@@ -1,19 +1,24 @@
 package controllers;
-import dao.ClienteDao;
+
 import dao.ProdutoDao;
 import factory.SessionHibernateFactory;
 import helpers.CargaHelper;
-import models.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.test.*;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Date;
+
+import models.Produto;
+import views.html.test.index;
+import views.html.test.cache;
+import views.html.test.pool;
+import views.html.test.carga;
 
 
 public class TestController extends Controller {
