@@ -1,8 +1,14 @@
+import java.util.Calendar;
 import java.util.List;
 
+import models.Cliente;
 import models.Endereco;
+import models.Fornecedor;
 import models.ItensPedido;
 import models.Pedido;
+import models.Pessoa;
+import models.Produto;
+import models.Vendedor;
 import dao.EnderecoDao;
 import dao.PedidoDao;
 
@@ -13,7 +19,7 @@ public class TesteHibernate {
 		EnderecoDao enderecoDao = new EnderecoDao();
 		enderecoDao.begin();
 	
-	/**	Endereco endereco = new Endereco();
+		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua Felino Barroso");
 		endereco.setCidade("Fortaleza");
 		endereco.setUf("CE");
@@ -76,7 +82,7 @@ public class TesteHibernate {
         produto.setNome("Produto 1");
         produto.setPreco(10.1);
         
-        enderecoDao.salvar(produto); */
+        enderecoDao.salvar(produto); 
 		
 		PedidoDao cDao = new PedidoDao();
 		

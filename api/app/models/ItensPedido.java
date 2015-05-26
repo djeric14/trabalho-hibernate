@@ -36,8 +36,13 @@ public class ItensPedido extends BaseModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Double getTotal() {
-		return total;
+    public Double getTotal() {
+
+        if(total == null){
+            setTotal();
+        }
+
+        return total;
 	}
 	
 	public void setTotal(){

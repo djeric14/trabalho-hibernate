@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Cliente;
-import models.ItensPedido;
 import models.Pedido;
 import models.Vendedor;
 import play.data.Form;
@@ -48,19 +47,20 @@ public class PedidoController extends Controller {
 	
 	public static Result adicionar(Integer id) {
         Pedido pedido = new Pedido();
+        
         Form<Pedido> pedidoForm = Form.form(Pedido.class).fill(pedido);
 
         List<Vendedor> vendedores = new ArrayList<>();
         VendedorDao vendedorDao = new VendedorDao();
         ClienteDao clienteDao = new ClienteDao();
         Cliente cliente = new Cliente();
-      
-        List<ItensPedido> itensPedido = new ArrayList<>();
         
         try {
             vendedorDao.begin();
             vendedores = vendedorDao.todos();
             cliente = clienteDao.consultarCliente(id);
+            
+            
             vendedorDao.commit();
 
         } catch (Exception e) {
@@ -68,25 +68,22 @@ public class PedidoController extends Controller {
             	vendedorDao.rollback();
             }
 
-            flash("error", "Erro ao listar fornecedores.");
+            flash("error", "Erro ao listar vendedores.");
         }
 
-        return ok(form.render(pedidoForm, cliente, vendedores, itensPedido));
+        return ok(form.render(pedidoForm, cliente, vendedores));
     }
 	
 	public static Result todos(){
 		PedidoDao dao = new PedidoDao();
 		dao.begin();
-
+		List<Pedido> clientePedidos = new ArrayList<>();
 		try {
-			
-			List<Pedido> clientePedidos = dao.todos();
+			clientePedidos = dao.todos();
 			dao.commit();
 			
 			return ok(listar.render(clientePedidos));
-			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			if (dao.isConnected()) {
 				dao.rollback();
 			}
@@ -94,8 +91,40 @@ public class PedidoController extends Controller {
 			flash("error",
 					"Ocorreu um erro : " + e.getMessage());
 		}
-
 		return redirect(routes.Application.index());
 	}
+	
+	public static Result save() {
+        Pedido pedido = Form.form(Pedido.class).bindFromRequest().get();
+        ClienteDao clienteDao = new ClienteDao();
+        VendedorDao vendedorDao = new VendedorDao();
+        
+        Integer idCliente = Integer.parseInt(Form.form(Pedido.class).bindFromRequest().field("id_cliente").value());
+        Integer idVendedor = Integer.parseInt(Form.form(Pedido.class).bindFromRequest().field("id_vendedor").value());
+        
+        PedidoDao dao = new PedidoDao();
+        dao.begin();
+
+        try {
+        	pedido.setCliente(clienteDao.consultarCliente(idCliente));
+        	pedido.setVendedor(vendedorDao.consultarVendedor(idVendedor));
+            dao.salvar(pedido);
+            dao.commit();
+
+            flash("success", "Pedido salvo com sucesso.");
+            return redirect(routes.PedidoController.index(pedido.getCliente().getId()));
+        } catch (Exception e) {
+            if (dao.isConnected()) {
+                dao.rollback();
+            }
+
+            flash("error", "Ocorreu um erro ao tentar salvar: " + e.getMessage());
+            vendedorDao.begin();
+            List<Vendedor> vendedores = vendedorDao.todos();
+            Form<Pedido> pedidoForm = Form.form(Pedido.class).fill(pedido);
+            vendedorDao.commit();
+            return ok(form.render(pedidoForm, pedido.getCliente(), vendedores));
+        }
+    }
 
 }

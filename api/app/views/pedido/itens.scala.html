@@ -1,4 +1,4 @@
-@(itens: List[ItensPedido], cliente: Cliente, idPedido: Integer)
+@(itens: List[ItensPedido])
 @main("Itens do Pedido"){
 
 @if(flash.get("success") != null) {
@@ -17,12 +17,11 @@
 							Pedido</a> -->
 					</div>
 					<div class="box-header">
-						<h3 class="box-title">ID Pedido @idPedido</h3>
+						<h3 class="box-title">ID Pedido @itens.get(0).getPedido().getId()</h3>
 					</div>
 					<div class="box-header">
-						<h3 class="box-title">Cliente: @cliente.getNome()</h3>
+						<h3 class="box-title">Cliente: @itens.get(0).getPedido().getCliente().getNome()</h3>
 					</div>
-					<!-- /.box-header -->
 				</div>
 
 				<!-- /.box-header -->

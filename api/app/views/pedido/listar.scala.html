@@ -24,17 +24,19 @@
 						</thead>
 
 						<tbody>
-							@for(pedido <- pedidos) {
-							<tr>
-								<td>@pedido.getId()</td>
-								<td>@pedido.getVendedor().getNome()</td>
-								<td>@pedido.getCliente().getNome()</td>
-								<td><a href="pedidos/listar/@pedido.getId()"
-									class="btn btn-sm btn-info" title="Listar">
-									<i class="fa fa-list"></i>
-									</a>
-								</td>
-							</tr>
+							@if(pedidos != null){
+								@for(pedido <- pedidos) {
+								<tr>
+									<td>@pedido.getId()</td>
+									<td>@pedido.getVendedor().getNome()</td>
+									<td>@pedido.getCliente().getNome()</td>
+									<td><a href="pedidos/listar/@pedido.getId()"
+										class="btn btn-sm btn-info" title="Listar">
+										<i class="fa fa-list"></i>
+										</a>
+									</td>
+								</tr>
+								}
 							}
 						</tbody>
 					</table>

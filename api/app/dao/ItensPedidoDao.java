@@ -16,10 +16,12 @@ public class ItensPedidoDao extends GenericDao {
 
 	@SuppressWarnings("unchecked")
 	public List<ItensPedido> listarItensPedido(Integer id) {
-		System.out.println("Pedido ="+id);
 		
 		return super.session.createCriteria(ItensPedido.class)
-				.setFetchMode("produto", FetchMode.JOIN).add(Restrictions.eq("pedido.id", id)).list();
+				.setFetchMode("produto", FetchMode.JOIN)
+				.setFetchMode("pedido", FetchMode.JOIN)
+				.setFetchMode("pedido.cliente", FetchMode.JOIN)
+				.add(Restrictions.eq("pedido.id", id)).list();
 	}
 	
 

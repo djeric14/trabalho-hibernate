@@ -64,6 +64,8 @@ public class ClienteController extends Controller {
 
     public static Result save() {
         Cliente cliente = Form.form(Cliente.class).bindFromRequest().get();
+        System.out.println(cliente.getEndereco().getLogradouro());
+        
         ClienteDao dao = new ClienteDao();
         dao.begin();
 
