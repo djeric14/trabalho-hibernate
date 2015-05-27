@@ -1,4 +1,4 @@
-@(mForm: play.data.Form[Pedido], cliente: Cliente, vendedores: List[Vendedor]) 
+@(mForm: play.data.Form[Pedido], cliente: Cliente, vendedores: List[Vendedor], produtos: List[Produto]) 
 @main("Cadastrar Pedido"){ 
 
 @if(flash.get("error") != null) {
@@ -28,6 +28,16 @@
 								}
 							</select>
 						</div>
+						
+						<div class="form-group">
+							<label for="produtos">Produto:</label> <select
+								class="form-control" id="produtos" name="id_produto">
+								@for(p <- produtos) {
+								<option value='@p.getId()'
+									@if( mForm("produto.id").value !=null&& mForm("produto.id").value.equals(p.getId().toString()) ) {selected}>@p.getNome</option>
+								}
+							</select>
+						</div>
 
 						<input type="hidden" value='@(cliente.getId())' name="id_cliente" />
 					</div>
@@ -42,56 +52,6 @@
 									<th>Quantidade</th>
 									<th>Preço</th>
 									<th class="actions">Ações</th>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td class="actions">
-										<button class="btn btn-large btn-danger"
-											onclick="RemoveTableRow(this)" type="button">Remover</button>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td class="actions">
-										<button class="btn btn-large btn-danger"
-											onclick="RemoveTableRow(this)" type="button">Remover</button>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td class="actions">
-										<button class="btn btn-large btn-danger"
-											onclick="RemoveTableRow(this)" type="button">Remover</button>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td class="actions">
-										<button class="btn btn-large btn-danger"
-											onclick="RemoveTableRow(this)" type="button">Remover</button>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td class="actions">
-										<button class="btn btn-large btn-danger"
-											onclick="RemoveTableRow(this)" type="button">Remover</button>
-									</td>
 								</tr>
 							</tbody>
 							<tfoot>

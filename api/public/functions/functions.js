@@ -26,7 +26,7 @@
       
       newRow.append(cols);
       
-      $("#products-table").append(newRow);
+      $("#produtos-table").append(newRow);
     
       return false;
   };

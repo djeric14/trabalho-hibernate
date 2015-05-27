@@ -1,16 +1,12 @@
-import java.util.Calendar;
 import java.util.List;
 
-import models.Cliente;
 import models.Endereco;
-import models.Fornecedor;
 import models.ItensPedido;
 import models.Pedido;
-import models.Pessoa;
 import models.Produto;
-import models.Vendedor;
 import dao.EnderecoDao;
 import dao.PedidoDao;
+import dao.ProdutoDao;
 
 public class TesteHibernate {
 
@@ -19,7 +15,7 @@ public class TesteHibernate {
 		EnderecoDao enderecoDao = new EnderecoDao();
 		enderecoDao.begin();
 	
-		Endereco endereco = new Endereco();
+		/**Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua Felino Barroso");
 		endereco.setCidade("Fortaleza");
 		endereco.setUf("CE");
@@ -82,9 +78,11 @@ public class TesteHibernate {
         produto.setNome("Produto 1");
         produto.setPreco(10.1);
         
-        enderecoDao.salvar(produto); 
+        enderecoDao.salvar(produto); */
 		
 		PedidoDao cDao = new PedidoDao();
+		
+		ProdutoDao pDao = new ProdutoDao();
 		
 		
 		try {
@@ -92,6 +90,12 @@ public class TesteHibernate {
 			//Pedido c = cDao.pedidosCliente(new Integer(1));
 			
 			List<Pedido> listP  = cDao.pedidosCliente(1);
+			
+			List<Produto> produtos = pDao.todos();
+			
+			for(Produto p1: produtos){
+				System.out.println(p1.getNome());
+			}
 			
 			for(Pedido p: listP){
 				System.out.println(p.getCliente().getNome());

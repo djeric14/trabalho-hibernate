@@ -57,14 +57,17 @@ public class PedidoController extends Controller {
         ClienteDao clienteDao = new ClienteDao();
         Cliente cliente = new Cliente();
         
-       // ProdutoDao produtoDao = new ProdutoDao();
-       // List<Produto> produtos = produtoDao.todos();
+        List<Produto> produtos = new ArrayList<>();
+        ProdutoDao produtoDao = new ProdutoDao();
         
+        //List<Produto> produtos = new ArrayList<>();
+       // ProdutoDao produtoDao = new ProdutoDao();
+       
         try {
             vendedorDao.begin();
             vendedores = vendedorDao.todos();
             cliente = clienteDao.consultarCliente(id);
-            
+            produtos = produtoDao.todos();
             
             vendedorDao.commit();
 
@@ -76,7 +79,7 @@ public class PedidoController extends Controller {
             flash("error", "Erro ao listar vendedores.");
         }
 
-        return ok(form.render(pedidoForm, cliente, vendedores));
+        return ok(form.render(pedidoForm, cliente, vendedores, produtos));
     }
 	
 	public static Result todos(){
@@ -107,6 +110,7 @@ public class PedidoController extends Controller {
         Integer idCliente = Integer.parseInt(Form.form(Pedido.class).bindFromRequest().field("id_cliente").value());
         Integer idVendedor = Integer.parseInt(Form.form(Pedido.class).bindFromRequest().field("id_vendedor").value());
         
+        ProdutoDao produtoDao = new ProdutoDao();
         PedidoDao dao = new PedidoDao();
         dao.begin();
 
@@ -126,9 +130,11 @@ public class PedidoController extends Controller {
             flash("error", "Ocorreu um erro ao tentar salvar: " + e.getMessage());
             vendedorDao.begin();
             List<Vendedor> vendedores = vendedorDao.todos();
+            List<Produto> produtos = produtoDao.todos();
+            
             Form<Pedido> pedidoForm = Form.form(Pedido.class).fill(pedido);
             vendedorDao.commit();
-            return ok(form.render(pedidoForm, pedido.getCliente(), vendedores));
+            return ok(form.render(pedidoForm, pedido.getCliente(), vendedores, produtos));
         }
     }
 
