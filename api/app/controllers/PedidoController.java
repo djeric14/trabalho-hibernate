@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Cliente;
+import models.ItensPedido;
 import models.Pedido;
 import models.Produto;
 import models.Vendedor;
@@ -112,13 +113,28 @@ public class PedidoController extends Controller {
         
         ProdutoDao produtoDao = new ProdutoDao();
         PedidoDao dao = new PedidoDao();
+        ItensPedido i = new ItensPedido();
+        
+        List<ItensPedido>itensList = new ArrayList<ItensPedido>();
         dao.begin();
 
         try {
+        	i.setProduto(produtoDao.consultarProduto(1));
+        	i.setQuantidade(new Integer(2));
+        	itensList.add(i);
+        	
+        	
+        	i.setProduto(produtoDao.consultarProduto(2));
+        	i.setQuantidade(new Integer(4));
+        	itensList.add(i);
+        	
         	pedido.setCliente(clienteDao.consultarCliente(idCliente));
         	pedido.setVendedor(vendedorDao.consultarVendedor(idVendedor));
+        	pedido.setItensPedido(itensList);
+        	
             dao.salvar(pedido);
             dao.commit();
+           // produtoDao.commit();
 
             flash("success", "Pedido salvo com sucesso.");
             return redirect(routes.PedidoController.index(pedido.getCliente().getId()));
