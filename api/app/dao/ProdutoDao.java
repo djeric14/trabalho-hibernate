@@ -22,6 +22,7 @@ public class ProdutoDao extends GenericDao {
 		return (Produto) super.session.createCriteria(Produto.class)
 				.add(Restrictions.eq("id", id))
 				.setFetchMode("fornecedor", FetchMode.JOIN)
+				.setFetchMode("categorias", FetchMode.JOIN)
 				.uniqueResult();
 	}
 	

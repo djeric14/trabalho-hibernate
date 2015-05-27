@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +34,18 @@ public class Produto extends BaseModel {
 
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     private Set<ItensPedido> itensPedidos;
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            targetEntity=models.Categoria.class
+    )
+    @JoinTable(
+            name="produto_categoria",
+            joinColumns=@JoinColumn(name="id_produto"),
+            inverseJoinColumns=@JoinColumn(name="id_categoria")
+    )
+    private List<Categoria> categorias;
 
     public Integer getId() {
 		return id;
@@ -80,5 +93,13 @@ public class Produto extends BaseModel {
 
     public void setItensPedidos(Set<ItensPedido> itensPedidos) {
         this.itensPedidos = itensPedidos;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 }

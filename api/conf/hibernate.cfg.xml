@@ -49,6 +49,7 @@
 		<mapping class="models.Visita" />
 		<mapping class="models.Pedido" />
 		<mapping class="models.ItensPedido" />
+		<mapping class="models.Categoria" />
 
 		<class-cache class="models.Produto" usage="read-write" />
 	</session-factory>

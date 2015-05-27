@@ -23,6 +23,7 @@ public class CargaHelper {
         Pedido pedido;
         ItensPedido itens;
         Agenda agenda;
+        Categoria categoria;
 
         try {
             dao.begin();
@@ -81,6 +82,13 @@ public class CargaHelper {
                 itens.setQuantidade(i);
 
                 dao.salvar(itens);
+
+                if (i % 10 == 0) {
+                    categoria = new Categoria();
+                    categoria.setNome("Categoria "+i);
+
+                    dao.salvar(categoria);
+                }
 
                 if (i % 50 == 0) {
                     agenda = new Agenda();
