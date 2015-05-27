@@ -1,9 +1,14 @@
+import java.util.Calendar;
 import java.util.List;
 
+import models.Cliente;
 import models.Endereco;
+import models.Fornecedor;
 import models.ItensPedido;
 import models.Pedido;
+import models.Pessoa;
 import models.Produto;
+import models.Vendedor;
 import dao.EnderecoDao;
 import dao.PedidoDao;
 import dao.ProdutoDao;
@@ -15,7 +20,7 @@ public class TesteHibernate {
 		EnderecoDao enderecoDao = new EnderecoDao();
 		enderecoDao.begin();
 	
-		/**Endereco endereco = new Endereco();
+		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua Felino Barroso");
 		endereco.setCidade("Fortaleza");
 		endereco.setUf("CE");
@@ -78,7 +83,7 @@ public class TesteHibernate {
         produto.setNome("Produto 1");
         produto.setPreco(10.1);
         
-        enderecoDao.salvar(produto); */
+        enderecoDao.salvar(produto);
 		
 		PedidoDao cDao = new PedidoDao();
 		
@@ -88,6 +93,13 @@ public class TesteHibernate {
 		try {
 			//System.out.println(pessoa.getId());
 			//Pedido c = cDao.pedidosCliente(new Integer(1));
+			
+			produto = pDao.consultarProduto(2);
+			produto.setNome("Produto 2");
+			
+			
+			enderecoDao.salvar(produto);
+			
 			
 			List<Pedido> listP  = cDao.pedidosCliente(1);
 			
@@ -115,7 +127,7 @@ public class TesteHibernate {
 				System.out.println(c1.getCpf());
 			}*/
 			
-			Endereco e = enderecoDao.consultarEnderecoCep("60050-130", 1009);
+			//Endereco e = enderecoDao.consultarEnderecoCep("60050-130", 1009);
 			
 		//	System.out.println(e.getLogradouro()+" - "+e.getLatitude()); */
 			

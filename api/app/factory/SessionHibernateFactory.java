@@ -6,6 +6,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import utils.AuditorInterceptor;
+
 public class SessionHibernateFactory {
 	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
@@ -13,6 +15,8 @@ public class SessionHibernateFactory {
 	public static synchronized Session getHibernateSession() {
 		if (sessionFactory == null) {
 			Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+			
+			configuration.setInterceptor(new AuditorInterceptor());
 
 			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 					configuration.getProperties()

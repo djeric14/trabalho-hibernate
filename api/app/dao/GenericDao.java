@@ -61,7 +61,7 @@ public abstract class GenericDao {
 	public List<BaseModel> listarTodos(Class base){
 		StringBuilder consulta = new StringBuilder();
 
-		consulta.append("select count(*) from ");
+		consulta.append("select * from ");
 		consulta.append(base.getName());
 
 		return session.createQuery(consulta.toString()).list();
