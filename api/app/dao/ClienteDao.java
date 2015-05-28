@@ -40,4 +40,6 @@ public class ClienteDao extends GenericDao {
 		return (Cliente) super.session.createQuery(consulta)
 				.setParameter("cpf", cpf).uniqueResult();
 	}
+	
+	
 }

@@ -1,17 +1,13 @@
-import java.util.Calendar;
 import java.util.List;
 
-import models.Cliente;
-import models.Endereco;
-import models.Fornecedor;
 import models.ItensPedido;
 import models.Pedido;
-import models.Pessoa;
 import models.Produto;
 import models.Vendedor;
 import dao.EnderecoDao;
 import dao.PedidoDao;
 import dao.ProdutoDao;
+import dao.VendedorDao;
 
 public class TesteHibernate {
 
@@ -20,7 +16,7 @@ public class TesteHibernate {
 		EnderecoDao enderecoDao = new EnderecoDao();
 		enderecoDao.begin();
 	
-		Endereco endereco = new Endereco();
+		/**Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua Felino Barroso");
 		endereco.setCidade("Fortaleza");
 		endereco.setUf("CE");
@@ -75,7 +71,7 @@ public class TesteHibernate {
         fornecedor.setNomeFantasia("Nome Fantasia do Fornecedor");
         fornecedor.setEndereco(endereco);
 
-        enderecoDao.salvar(fornecedor);
+        enderecoDao.salvar(fornecedor); 
 
         Produto produto = new Produto();
         produto.setEstoque(10);
@@ -83,7 +79,7 @@ public class TesteHibernate {
         produto.setNome("Produto 1");
         produto.setPreco(10.1);
         
-        enderecoDao.salvar(produto);
+        enderecoDao.salvar(produto);*/
 		
 		PedidoDao cDao = new PedidoDao();
 		
@@ -94,28 +90,32 @@ public class TesteHibernate {
 			//System.out.println(pessoa.getId());
 			//Pedido c = cDao.pedidosCliente(new Integer(1));
 			
-			produto = pDao.consultarProduto(2);
-			produto.setNome("Produto 2");
+			Produto produto = pDao.consultarProduto(1);
 			
+
+			produto.setNome("Produto novo 1");
+			pDao.salvar(produto);
 			
 			enderecoDao.salvar(produto);
 			
 			
-			List<Pedido> listP  = cDao.pedidosCliente(1);
+			List<Pedido> listP  = cDao.pedidosCliente(5);
+			
+			System.out.println(listP.size());
 			
 			List<Produto> produtos = pDao.todos();
 			
-			for(Produto p1: produtos){
-				System.out.println(p1.getNome());
-			}
+			VendedorDao v = new VendedorDao();
 			
-			for(Pedido p: listP){
-				System.out.println(p.getCliente().getNome());
-				System.out.println(p.getCliente().getCpf());
-				for(ItensPedido i: p.getItensPedido()){
-					System.out.println("Produto="+i.getProduto().getNome());
-					//System.out.println("Cliente="+i.gegetCliente().getNome());
-				}
+			List<Pedido> lv = v.listarQuantidadeClientesVendedor();
+			
+			for(Pedido v1: lv){
+				System.out.println(v1.getCliente().getNome());
+				System.out.println(v1.getVendedor().getNome());
+				//for(ItensPedido i: p.getItensPedido()){
+					//System.out.println("Produto="+i.getProduto().getNome());
+					//System.out.println("Cliente="+i.getCliente().getNome());
+			//	}
 				
 			}
 					

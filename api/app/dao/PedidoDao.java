@@ -35,4 +35,5 @@ public class PedidoDao extends GenericDao {
 				.setFetchMode("cliente", FetchMode.JOIN).add(Restrictions.eq("pedido.id", id)).uniqueResult();
 		
 	}
+	
 }

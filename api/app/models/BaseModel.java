@@ -24,7 +24,7 @@ public class BaseModel implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="data_atualizacao")
-	protected Date dataAtualizacao;
+	protected Date dataAtualizacao = new Date();
 	
 
 	public Date getDataAtualizacao() {
